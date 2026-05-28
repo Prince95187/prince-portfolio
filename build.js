@@ -30,16 +30,16 @@ const { code } = Babel.transform(jsxCode, {
 
 // ── 3. Swap CDN references ───────────────────────────────────────────
 html = html
-  // Remove Babel CDN script tag
+  // Remove Babel CDN script tag (with any attributes)
   .replace(/<script\s+src="https:\/\/unpkg\.com\/@babel\/standalone[^"]*"[^>]*><\/script>\s*/g, "")
-  // React dev → production (jsDelivr — fast in Asia/India)
+  // Replace React dev script tags (including any integrity/crossorigin attrs) with clean production tags
   .replace(
-    /https:\/\/unpkg\.com\/react@18\.3\.1\/umd\/react\.development\.js/g,
-    "https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"
+    /<script[^>]*src="https:\/\/unpkg\.com\/react@18\.3\.1\/umd\/react\.development\.js"[^>]*><\/script>/g,
+    '<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>'
   )
   .replace(
-    /https:\/\/unpkg\.com\/react-dom@18\.3\.1\/umd\/react-dom\.development\.js/g,
-    "https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"
+    /<script[^>]*src="https:\/\/unpkg\.com\/react-dom@18\.3\.1\/umd\/react-dom\.development\.js"[^>]*><\/script>/g,
+    '<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>'
   )
   // Replace <script type="text/babel">…</script> with compiled output
   .replace(babelScriptRx, `<script>\n${code}\n</script>`);
