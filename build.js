@@ -17,7 +17,7 @@ let html = fs.readFileSync(SRC, "utf-8");
 // ── 1. Extract the JSX block ─────────────────────────────────────────
 const babelScriptRx = /<script\s+type="text\/babel">([\s\S]*?)<\/script>/;
 const match = html.match(babelScriptRx);
-if (!match) { console.error("No <script type=\"text/babel\"> found."); process.exit(1); }
+if (!match) { console.log("index.html is already compiled — nothing to do."); process.exit(0); }
 
 const jsxCode = match[1];
 
