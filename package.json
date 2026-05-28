@@ -1,0 +1,15 @@
+{
+  "name": "prince-kommina-portfolio",
+  "version": "1.0.0",
+  "description": "Prince Kommina – Full-stack developer portfolio",
+  "scripts": {
+    "start": "serve . --listen $PORT --no-clipboard",
+    "dev": "serve . --listen 5200"
+  },
+  "dependencies": {
+    "serve": "^14.2.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
