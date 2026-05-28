@@ -554,107 +554,194 @@
 <body class="bg-paper text-white antialiased">
 <div id="root"></div>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js"
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"
         integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
         crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"
         integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
         crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
-        integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
-        crossorigin="anonymous"></script>
-
-<script type="text/babel">
-const { useState, useEffect, useRef } = React;
-
-/* ── ICONS ─────────────────────────────────────────────────── */
+<script>
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+const {
+  useState,
+  useEffect,
+  useRef
+} = React;
 const I = {
-  ArrowUpRight: (p) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <path d="M7 17 17 7"/><path d="M7 7h10v10"/>
-    </svg>
-  ),
-  X: (p) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-    </svg>
-  ),
-  Monitor: (p) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/>
-    </svg>
-  ),
-  Palette: (p) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
-      <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
-      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
-    </svg>
-  ),
-  Zap: (p) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>
-    </svg>
-  ),
-  Cpu: (p) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/>
-      <path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"/>
-    </svg>
-  ),
+  ArrowUpRight: p => React.createElement("svg", _extends({
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, p), React.createElement("path", {
+    d: "M7 17 17 7"
+  }), React.createElement("path", {
+    d: "M7 7h10v10"
+  })),
+  X: p => React.createElement("svg", _extends({
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, p), React.createElement("path", {
+    d: "M18 6 6 18"
+  }), React.createElement("path", {
+    d: "m6 6 12 12"
+  })),
+  Monitor: p => React.createElement("svg", _extends({
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, p), React.createElement("rect", {
+    x: "2",
+    y: "3",
+    width: "20",
+    height: "14",
+    rx: "2"
+  }), React.createElement("path", {
+    d: "M8 21h8m-4-4v4"
+  })),
+  Palette: p => React.createElement("svg", _extends({
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, p), React.createElement("circle", {
+    cx: "13.5",
+    cy: "6.5",
+    r: ".5",
+    fill: "currentColor"
+  }), React.createElement("circle", {
+    cx: "17.5",
+    cy: "10.5",
+    r: ".5",
+    fill: "currentColor"
+  }), React.createElement("circle", {
+    cx: "8.5",
+    cy: "7.5",
+    r: ".5",
+    fill: "currentColor"
+  }), React.createElement("circle", {
+    cx: "6.5",
+    cy: "12.5",
+    r: ".5",
+    fill: "currentColor"
+  }), React.createElement("path", {
+    d: "M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
+  })),
+  Zap: p => React.createElement("svg", _extends({
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, p), React.createElement("path", {
+    d: "M13 2 3 14h9l-1 8 10-12h-9l1-8z"
+  })),
+  Cpu: p => React.createElement("svg", _extends({
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }, p), React.createElement("rect", {
+    x: "4",
+    y: "4",
+    width: "16",
+    height: "16",
+    rx: "2"
+  }), React.createElement("rect", {
+    x: "9",
+    y: "9",
+    width: "6",
+    height: "6"
+  }), React.createElement("path", {
+    d: "M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"
+  }))
 };
-
-/* ── REVEAL ─────────────────────────────────────────────────── */
-function Reveal({ children, delay = 0, className = "", as = "div" }) {
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+  as = "div"
+}) {
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { el.classList.add("is-in"); io.disconnect(); } },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
-    );
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        el.classList.add("is-in");
+        io.disconnect();
+      }
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -8% 0px"
+    });
     io.observe(el);
     return () => io.disconnect();
   }, []);
   const Tag = as;
-  return (
-    <Tag ref={ref} className={`reveal ${className}`} style={{ "--rd": delay + "ms" }}>
-      {children}
-    </Tag>
-  );
+  return React.createElement(Tag, {
+    ref: ref,
+    className: `reveal ${className}`,
+    style: {
+      "--rd": delay + "ms"
+    }
+  }, children);
 }
-
-function WordReveal({ words, className = "", baseDelay = 0, gap = 80 }) {
+function WordReveal({
+  words,
+  className = "",
+  baseDelay = 0,
+  gap = 80
+}) {
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          [...el.querySelectorAll(".reveal-word")].forEach(w => w.classList.add("is-in"));
-          io.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        [...el.querySelectorAll(".reveal-word")].forEach(w => w.classList.add("is-in"));
+        io.disconnect();
+      }
+    }, {
+      threshold: 0.2
+    });
     io.observe(el);
     return () => io.disconnect();
   }, []);
   const out = [];
   words.forEach((w, i) => {
     if (i > 0) out.push(" ");
-    out.push(
-      <span key={i} className="reveal-word" style={{ "--rd": (baseDelay + i * gap) + "ms" }}>
-        <span dangerouslySetInnerHTML={{ __html: w }} />
-      </span>
-    );
+    out.push(React.createElement("span", {
+      key: i,
+      className: "reveal-word",
+      style: {
+        "--rd": baseDelay + i * gap + "ms"
+      }
+    }, React.createElement("span", {
+      dangerouslySetInnerHTML: {
+        __html: w
+      }
+    })));
   });
-  return <span ref={ref} className={className}>{out}</span>;
+  return React.createElement("span", {
+    ref: ref,
+    className: className
+  }, out);
 }
-
-/* ── SCROLL PROGRESS ────────────────────────────────────────── */
 function ScrollProgress() {
   const ref = useRef(null);
   useEffect(() => {
@@ -666,598 +753,988 @@ function ScrollProgress() {
       if (bar) bar.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
       raf = 0;
     };
-    const on = () => { if (!raf) raf = requestAnimationFrame(update); };
+    const on = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
     update();
-    window.addEventListener("scroll", on, { passive: true });
-    window.addEventListener("resize", on, { passive: true });
-    return () => { window.removeEventListener("scroll", on); window.removeEventListener("resize", on); };
+    window.addEventListener("scroll", on, {
+      passive: true
+    });
+    window.addEventListener("resize", on, {
+      passive: true
+    });
+    return () => {
+      window.removeEventListener("scroll", on);
+      window.removeEventListener("resize", on);
+    };
   }, []);
-  return <div ref={ref} className="scroll-bar" />;
+  return React.createElement("div", {
+    ref: ref,
+    className: "scroll-bar"
+  });
 }
-
-/* ── LOGO ───────────────────────────────────────────────────── */
-function Logo({ animated, delayIndex = 0 }) {
-  return (
-    <div className={`flex items-center gap-3 ${animated ? "fadeDown" : ""}`}
-         style={animated ? { "--ad": (delayIndex * 100) + "ms" } : {}}>
-      <span className="relative inline-block" style={{ width: 32, height: 32 }}>
-        <span className="absolute inset-0 rounded-full border-2" style={{ borderColor: "var(--teal)" }} />
-        <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-              style={{ width: 10, height: 10, background: "var(--teal)" }} />
-      </span>
-      <span className="text-[14px] font-semibold tracking-[0.22em] text-white uppercase">PK</span>
-    </div>
-  );
+function Logo({
+  animated,
+  delayIndex = 0
+}) {
+  return React.createElement("div", {
+    className: `flex items-center gap-3 ${animated ? "fadeDown" : ""}`,
+    style: animated ? {
+      "--ad": delayIndex * 100 + "ms"
+    } : {}
+  }, React.createElement("span", {
+    className: "relative inline-block",
+    style: {
+      width: 32,
+      height: 32
+    }
+  }, React.createElement("span", {
+    className: "absolute inset-0 rounded-full border-2",
+    style: {
+      borderColor: "var(--teal)"
+    }
+  }), React.createElement("span", {
+    className: "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full",
+    style: {
+      width: 10,
+      height: 10,
+      background: "var(--teal)"
+    }
+  })), React.createElement("span", {
+    className: "text-[14px] font-semibold tracking-[0.22em] text-white uppercase"
+  }, "PK"));
 }
-
-/* ── NAV ────────────────────────────────────────────────────── */
-function Nav({ onOpenMenu }) {
-  const links = ["WORK","ABOUT","SERVICES","CONTACT"];
-  return (
-    <nav className="flex items-center justify-between px-5 sm:px-8 md:px-12 pt-5 md:pt-6 relative z-30">
-      <Logo animated delayIndex={0} />
-      <div className="hidden md:flex items-center gap-9">
-        {links.map((l, i) => (
-          <a key={l} href={"#" + l.toLowerCase()}
-             className="nav-link fadeDown text-[14px] font-semibold tracking-[0.22em] uppercase text-white/80"
-             style={{ "--ad": ((i + 1) * 100) + "ms" }}>
-            {l}
-          </a>
-        ))}
-      </div>
-      <button onClick={onOpenMenu} aria-label="Open menu"
-              className="fadeDown inline-grid place-items-center rounded-full border border-white/15 bg-white/8 hover:bg-teal hover:border-teal transition-colors"
-              style={{ width: 36, height: 36, "--ad": "500ms" }}>
-        <span className="flex flex-col gap-1">
-          <span className="block bg-white" style={{ width: 14, height: 1.5 }} />
-          <span className="block bg-white" style={{ width: 14, height: 1.5 }} />
-          <span className="block bg-white" style={{ width: 14, height: 1.5 }} />
-        </span>
-      </button>
-    </nav>
-  );
+function Nav({
+  onOpenMenu
+}) {
+  const links = ["WORK", "ABOUT", "SERVICES", "CONTACT"];
+  return React.createElement("nav", {
+    className: "flex items-center justify-between px-5 sm:px-8 md:px-12 pt-5 md:pt-6 relative z-30"
+  }, React.createElement(Logo, {
+    animated: true,
+    delayIndex: 0
+  }), React.createElement("div", {
+    className: "hidden md:flex items-center gap-9"
+  }, links.map((l, i) => React.createElement("a", {
+    key: l,
+    href: "#" + l.toLowerCase(),
+    className: "nav-link fadeDown text-[14px] font-semibold tracking-[0.22em] uppercase text-white/80",
+    style: {
+      "--ad": (i + 1) * 100 + "ms"
+    }
+  }, l))), React.createElement("button", {
+    onClick: onOpenMenu,
+    "aria-label": "Open menu",
+    className: "fadeDown inline-grid place-items-center rounded-full border border-white/15 bg-white/8 hover:bg-teal hover:border-teal transition-colors",
+    style: {
+      width: 36,
+      height: 36,
+      "--ad": "500ms"
+    }
+  }, React.createElement("span", {
+    className: "flex flex-col gap-1"
+  }, React.createElement("span", {
+    className: "block bg-white",
+    style: {
+      width: 14,
+      height: 1.5
+    }
+  }), React.createElement("span", {
+    className: "block bg-white",
+    style: {
+      width: 14,
+      height: 1.5
+    }
+  }), React.createElement("span", {
+    className: "block bg-white",
+    style: {
+      width: 14,
+      height: 1.5
+    }
+  }))));
 }
-
-/* ── MOBILE MENU ────────────────────────────────────────────── */
-function MobileMenu({ open, onClose }) {
+function MobileMenu({
+  open,
+  onClose
+}) {
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
     return () => document.body.classList.remove("menu-open");
   }, [open]);
   if (!open) return null;
-  const links = ["WORK","ABOUT","SERVICES","CONTACT"];
-  return (
-    <div className="fixed inset-0 z-50 bg-paper">
-      {/* subtle glow */}
-      <div className="absolute inset-0 pointer-events-none"
-           style={{ background: "radial-gradient(ellipse at 30% 40%, rgba(13,115,119,0.15) 0%, transparent 60%)" }} />
-      <div className="flex items-center justify-between px-5 sm:px-8 pt-5 relative">
-        <Logo />
-        <button onClick={onClose} aria-label="Close menu"
-                className="inline-grid place-items-center rounded-full border border-white/15 bg-white/8 text-white hover:bg-teal hover:border-teal transition-colors"
-                style={{ width: 36, height: 36 }}>
-          <I.X width="16" height="16" />
-        </button>
-      </div>
-      <div className="flex flex-col gap-8 px-5 sm:px-8 mt-16 relative">
-        {links.map((l, i) => (
-          <a key={l} href={"#" + l.toLowerCase()} onClick={onClose}
-             className="text-3xl font-semibold tracking-widest uppercase text-white hover:text-teal transition-colors"
-             style={{ animation: `fadeUp 600ms cubic-bezier(0.22,1,0.36,1) ${i * 80}ms both` }}>
-            {l}
-          </a>
-        ))}
-      </div>
-      <a href="#contact" onClick={onClose}
-         className="absolute left-5 right-5 sm:left-8 sm:right-8 bottom-10 inline-flex items-center justify-between gap-2 text-xl font-semibold tracking-widest uppercase"
-         style={{ color: "var(--teal)" }}>
-        Hire Me <I.ArrowUpRight width="22" height="22" />
-      </a>
-    </div>
-  );
+  const links = ["WORK", "ABOUT", "SERVICES", "CONTACT"];
+  return React.createElement("div", {
+    className: "fixed inset-0 z-50 bg-paper"
+  }, React.createElement("div", {
+    className: "absolute inset-0 pointer-events-none",
+    style: {
+      background: "radial-gradient(ellipse at 30% 40%, rgba(13,115,119,0.15) 0%, transparent 60%)"
+    }
+  }), React.createElement("div", {
+    className: "flex items-center justify-between px-5 sm:px-8 pt-5 relative"
+  }, React.createElement(Logo, null), React.createElement("button", {
+    onClick: onClose,
+    "aria-label": "Close menu",
+    className: "inline-grid place-items-center rounded-full border border-white/15 bg-white/8 text-white hover:bg-teal hover:border-teal transition-colors",
+    style: {
+      width: 36,
+      height: 36
+    }
+  }, React.createElement(I.X, {
+    width: "16",
+    height: "16"
+  }))), React.createElement("div", {
+    className: "flex flex-col gap-8 px-5 sm:px-8 mt-16 relative"
+  }, links.map((l, i) => React.createElement("a", {
+    key: l,
+    href: "#" + l.toLowerCase(),
+    onClick: onClose,
+    className: "text-3xl font-semibold tracking-widest uppercase text-white hover:text-teal transition-colors",
+    style: {
+      animation: `fadeUp 600ms cubic-bezier(0.22,1,0.36,1) ${i * 80}ms both`
+    }
+  }, l))), React.createElement("a", {
+    href: "#contact",
+    onClick: onClose,
+    className: "absolute left-5 right-5 sm:left-8 sm:right-8 bottom-10 inline-flex items-center justify-between gap-2 text-xl font-semibold tracking-widest uppercase",
+    style: {
+      color: "var(--teal)"
+    }
+  }, "Hire Me ", React.createElement(I.ArrowUpRight, {
+    width: "22",
+    height: "22"
+  })));
 }
-
-/* ── HERO ───────────────────────────────────────────────────── */
-function Stat({ num, label, delayIndex }) {
-  return (
-    <div className="fadeUp flex flex-col items-end text-right"
-         style={{ "--ad": (delayIndex * 120) + "ms" }}>
-      <div className="leading-none" style={{ fontSize: "clamp(1.5rem,5vw,3.5rem)", fontWeight: 600, color: "var(--ink)" }}>
-        <span style={{ color: "var(--teal)", fontSize: "0.5em", verticalAlign: "top", marginRight: "0.05em" }}>+</span>
-        {num}
-      </div>
-      <div className="mt-2 text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-white/60 whitespace-pre-line leading-tight">
-        {label}
-      </div>
-    </div>
-  );
+function Stat({
+  num,
+  label,
+  delayIndex
+}) {
+  return React.createElement("div", {
+    className: "fadeUp flex flex-col items-end text-right",
+    style: {
+      "--ad": delayIndex * 120 + "ms"
+    }
+  }, React.createElement("div", {
+    className: "leading-none",
+    style: {
+      fontSize: "clamp(1.5rem,5vw,3.5rem)",
+      fontWeight: 600,
+      color: "var(--ink)"
+    }
+  }, React.createElement("span", {
+    style: {
+      color: "var(--teal)",
+      fontSize: "0.5em",
+      verticalAlign: "top",
+      marginRight: "0.05em"
+    }
+  }, "+"), num), React.createElement("div", {
+    className: "mt-2 text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-white/60 whitespace-pre-line leading-tight"
+  }, label));
 }
-
 function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
-  return (
-    <section className="relative min-h-screen flex flex-col bg-paper overflow-hidden">
-      {/* background: fullscreen video */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <video
-          className="hero-video"
-          autoPlay muted loop playsInline
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4"
-        />
-        <div className="hero-video-overlay" />
-        <div className="hero-glow" />
-        <div className="bg-mesh" />
-        <div className="absolute inset-0 hidden lg:block" style={{ zIndex: 3 }}>
-          <div className="guide" style={{ left: "25%" }} />
-          <div className="guide" style={{ left: "50%" }} />
-          <div className="guide" style={{ left: "75%" }} />
-        </div>
-      </div>
-
-      {/* live badge */}
-      <div className="absolute top-4 right-4 z-30 flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm fadeDown"
-           style={{ "--ad": "700ms" }}>
-        <span className="live-dot" />
-        <span className="text-[10px] font-semibold tracking-widest uppercase text-white/80">Live — edufee.up.railway.app</span>
-      </div>
-
-      <Nav onOpenMenu={() => setMenuOpen(true)} />
-      <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
-
-      {/* centre row: name left · stats right */}
-      <div className="flex-1 flex items-center justify-between px-5 sm:px-8 md:px-12 py-8 md:py-0 relative z-10">
-        {/* big name */}
-        <div className="fadeUp" style={{ "--ad": "180ms" }}>
-          <p style={{
-            fontSize: "clamp(2.4rem, 7.5vw, 7rem)",
-            fontWeight: 800,
-            lineHeight: 0.88,
-            letterSpacing: "-0.03em",
-            textTransform: "uppercase",
-            color: "var(--ink)",
-            userSelect: "none",
-          }}>
-            PRINCE<br />
-            <span style={{ color: "var(--teal)" }}>KOMMINA</span>
-          </p>
-        </div>
-        {/* stats */}
-        <div className="flex items-start gap-5 sm:gap-8 md:gap-10">
-          <Stat num="200" label={"DAILY\nUSERS"}         delayIndex={2} />
-          <Stat num="3"   label={"APPS\nSHIPPED"}        delayIndex={3} />
-          <Stat num="4"   label={"PRODUCTION\nPROJECTS"} delayIndex={4} />
-        </div>
-      </div>
-
-      {/* bottom content */}
-      <div className="px-5 sm:px-8 md:px-12 pb-8 md:pb-12 flex flex-col gap-6 md:gap-12 relative z-10">
-        <div className="flex items-center justify-between gap-4">
-          <p className="fadeUp text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-white/60 leading-tight"
-             style={{ "--ad": "600ms", maxWidth: "160px" }}>
-            CS Student<br />Building Real<br />Production Apps
-          </p>
-          <a href="#contact"
-             className="fadeUp inline-flex items-center gap-2 text-base sm:text-xl md:text-2xl font-semibold whitespace-nowrap"
-             style={{ "--ad": "720ms", color: "var(--teal)" }}>
-            Hire Me
-            <I.ArrowUpRight className="hidden sm:block" width="22" height="22" />
-            <I.ArrowUpRight className="sm:hidden" width="18" height="18" />
-          </a>
-        </div>
-        <div className="flex items-end justify-between gap-3 sm:gap-4">
-          <p className="fadeUp text-[9px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-white/50 shrink-0 leading-tight"
-             style={{ "--ad": "840ms", maxWidth: "280px" }}>
-            CS Student · Bengaluru<br />Building Real Products<br />Between Lectures
-          </p>
-          <h1 className="text-right font-semibold uppercase"
-              style={{ fontSize: "clamp(2rem,9vw,9rem)", lineHeight: 0.88, letterSpacing: "-0.03em" }}>
-            <span className="word-clip" style={{ color: "var(--ink)" }}><span style={{ "--ad": "400ms" }}>Ships</span></span>
-            <span className="word-clip" style={{ color: "var(--ink)" }}><span style={{ "--ad": "540ms" }}>Real</span></span>
-            <span className="word-clip"><span className="shine-text" style={{ "--ad": "680ms" }}>Software.</span></span>
-          </h1>
-        </div>
-      </div>
-    </section>
-  );
+  return React.createElement("section", {
+    className: "relative min-h-screen flex flex-col bg-paper overflow-hidden"
+  }, React.createElement("div", {
+    className: "absolute inset-0 overflow-hidden pointer-events-none"
+  }, React.createElement("video", {
+    className: "hero-video",
+    autoPlay: true,
+    muted: true,
+    loop: true,
+    playsInline: true,
+    src: "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4"
+  }), React.createElement("div", {
+    className: "hero-video-overlay"
+  }), React.createElement("div", {
+    className: "hero-glow"
+  }), React.createElement("div", {
+    className: "bg-mesh"
+  }), React.createElement("div", {
+    className: "absolute inset-0 hidden lg:block",
+    style: {
+      zIndex: 3
+    }
+  }, React.createElement("div", {
+    className: "guide",
+    style: {
+      left: "25%"
+    }
+  }), React.createElement("div", {
+    className: "guide",
+    style: {
+      left: "50%"
+    }
+  }), React.createElement("div", {
+    className: "guide",
+    style: {
+      left: "75%"
+    }
+  }))), React.createElement("div", {
+    className: "absolute top-4 right-4 z-30 flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm fadeDown",
+    style: {
+      "--ad": "700ms"
+    }
+  }, React.createElement("span", {
+    className: "live-dot"
+  }), React.createElement("span", {
+    className: "text-[10px] font-semibold tracking-widest uppercase text-white/80"
+  }, "Live \u2014 edufee.up.railway.app")), React.createElement(Nav, {
+    onOpenMenu: () => setMenuOpen(true)
+  }), React.createElement(MobileMenu, {
+    open: menuOpen,
+    onClose: () => setMenuOpen(false)
+  }), React.createElement("div", {
+    className: "flex-1 flex items-center justify-between px-5 sm:px-8 md:px-12 py-8 md:py-0 relative z-10"
+  }, React.createElement("div", {
+    className: "fadeUp",
+    style: {
+      "--ad": "180ms"
+    }
+  }, React.createElement("p", {
+    style: {
+      fontSize: "clamp(2.4rem, 7.5vw, 7rem)",
+      fontWeight: 800,
+      lineHeight: 0.88,
+      letterSpacing: "-0.03em",
+      textTransform: "uppercase",
+      color: "var(--ink)",
+      userSelect: "none"
+    }
+  }, "PRINCE", React.createElement("br", null), React.createElement("span", {
+    style: {
+      color: "var(--teal)"
+    }
+  }, "KOMMINA"))), React.createElement("div", {
+    className: "flex items-start gap-5 sm:gap-8 md:gap-10"
+  }, React.createElement(Stat, {
+    num: "200",
+    label: "DAILY\nUSERS",
+    delayIndex: 2
+  }), React.createElement(Stat, {
+    num: "3",
+    label: "APPS\nSHIPPED",
+    delayIndex: 3
+  }), React.createElement(Stat, {
+    num: "4",
+    label: "PRODUCTION\nPROJECTS",
+    delayIndex: 4
+  }))), React.createElement("div", {
+    className: "px-5 sm:px-8 md:px-12 pb-8 md:pb-12 flex flex-col gap-6 md:gap-12 relative z-10"
+  }, React.createElement("div", {
+    className: "flex items-center justify-between gap-4"
+  }, React.createElement("p", {
+    className: "fadeUp text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-white/60 leading-tight",
+    style: {
+      "--ad": "600ms",
+      maxWidth: "160px"
+    }
+  }, "CS Student", React.createElement("br", null), "Building Real", React.createElement("br", null), "Production Apps"), React.createElement("a", {
+    href: "#contact",
+    className: "fadeUp inline-flex items-center gap-2 text-base sm:text-xl md:text-2xl font-semibold whitespace-nowrap",
+    style: {
+      "--ad": "720ms",
+      color: "var(--teal)"
+    }
+  }, "Hire Me", React.createElement(I.ArrowUpRight, {
+    className: "hidden sm:block",
+    width: "22",
+    height: "22"
+  }), React.createElement(I.ArrowUpRight, {
+    className: "sm:hidden",
+    width: "18",
+    height: "18"
+  }))), React.createElement("div", {
+    className: "flex items-end justify-between gap-3 sm:gap-4"
+  }, React.createElement("p", {
+    className: "fadeUp text-[9px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-white/50 shrink-0 leading-tight",
+    style: {
+      "--ad": "840ms",
+      maxWidth: "280px"
+    }
+  }, "CS Student \xB7 Bengaluru", React.createElement("br", null), "Building Real Products", React.createElement("br", null), "Between Lectures"), React.createElement("h1", {
+    className: "text-right font-semibold uppercase",
+    style: {
+      fontSize: "clamp(2rem,9vw,9rem)",
+      lineHeight: 0.88,
+      letterSpacing: "-0.03em"
+    }
+  }, React.createElement("span", {
+    className: "word-clip",
+    style: {
+      color: "var(--ink)"
+    }
+  }, React.createElement("span", {
+    style: {
+      "--ad": "400ms"
+    }
+  }, "Ships")), React.createElement("span", {
+    className: "word-clip",
+    style: {
+      color: "var(--ink)"
+    }
+  }, React.createElement("span", {
+    style: {
+      "--ad": "540ms"
+    }
+  }, "Real")), React.createElement("span", {
+    className: "word-clip"
+  }, React.createElement("span", {
+    className: "shine-text",
+    style: {
+      "--ad": "680ms"
+    }
+  }, "Software."))))));
 }
-
-/* ── ABOUT ──────────────────────────────────────────────────── */
 function About() {
-  return (
-    <section id="about" className="section">
-      <div className="section__inner">
-        <Reveal><span className="eyebrow">About</span></Reveal>
-        <h2 className="display" style={{ fontSize: "clamp(48px,9vw,140px)", marginTop: 24 }}>
-          <WordReveal words={["Real","software"]} />
-          <br/>
-          <span className="accent"><WordReveal words={["not","demos."]} baseDelay={140} /></span>
-        </h2>
-        <div className="about-grid">
-          <Reveal delay={120} className="about-side">
-            <h3>Profile</h3>
-            <div className="about-meta">
-              <div><span className="k">Based</span><span className="v">Bengaluru, IN</span></div>
-              <div><span className="k">University</span><span className="v">Vidyashilp</span></div>
-              <div><span className="k">Years</span><span className="v">2024 — 2028</span></div>
-              <div><span className="k">Stack</span><span className="v">Full-stack + AI</span></div>
-              <div><span className="k">Status</span><span className="v" style={{ color: "var(--teal)" }}>Available 2026</span></div>
-              <div><span className="k">Reply</span><span className="v">~ 24 hours</span></div>
-            </div>
-          </Reveal>
-          <div className="about-essay">
-            <Reveal delay={80}><p>
-              <span className="num">01</span>
-              I'm 19, studying CS at Vidyashilp University in Bengaluru — but I didn't wait until graduation
-              to start building. <span className="accent">EduFee is already live at a real school,</span> with
-              real parents and teachers depending on it every single day.
-            </p></Reveal>
-            <Reveal delay={160}><p>
-              <span className="num">02</span>
-              I gravitate toward the kind of work that actually affects people — platforms that handle money,
-              learning, health, or time. I pick up whatever it takes to ship the thing properly, and I've
-              figured out that <span className="accent">AI makes everything move faster</span> when you know
-              how to wield it.
-            </p></Reveal>
-            <Reveal delay={240}><p>
-              <span className="num">03</span>
-              I freelance between semesters and during breaks. If you have a product idea and need someone
-              who'll treat it like their own — <span className="accent">I'm genuinely that person.</span>
-              I reply fast, I ask good questions, and I don't disappear halfway through.
-            </p></Reveal>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return React.createElement("section", {
+    id: "about",
+    className: "section"
+  }, React.createElement("div", {
+    className: "section__inner"
+  }, React.createElement(Reveal, null, React.createElement("span", {
+    className: "eyebrow"
+  }, "About")), React.createElement("h2", {
+    className: "display",
+    style: {
+      fontSize: "clamp(48px,9vw,140px)",
+      marginTop: 24
+    }
+  }, React.createElement(WordReveal, {
+    words: ["Real", "software"]
+  }), React.createElement("br", null), React.createElement("span", {
+    className: "accent"
+  }, React.createElement(WordReveal, {
+    words: ["not", "demos."],
+    baseDelay: 140
+  }))), React.createElement("div", {
+    className: "about-grid"
+  }, React.createElement(Reveal, {
+    delay: 120,
+    className: "about-side"
+  }, React.createElement("h3", null, "Profile"), React.createElement("div", {
+    className: "about-meta"
+  }, React.createElement("div", null, React.createElement("span", {
+    className: "k"
+  }, "Based"), React.createElement("span", {
+    className: "v"
+  }, "Bengaluru, IN")), React.createElement("div", null, React.createElement("span", {
+    className: "k"
+  }, "University"), React.createElement("span", {
+    className: "v"
+  }, "Vidyashilp")), React.createElement("div", null, React.createElement("span", {
+    className: "k"
+  }, "Years"), React.createElement("span", {
+    className: "v"
+  }, "2024 \u2014 2028")), React.createElement("div", null, React.createElement("span", {
+    className: "k"
+  }, "Stack"), React.createElement("span", {
+    className: "v"
+  }, "Full-stack + AI")), React.createElement("div", null, React.createElement("span", {
+    className: "k"
+  }, "Status"), React.createElement("span", {
+    className: "v",
+    style: {
+      color: "var(--teal)"
+    }
+  }, "Available 2026")), React.createElement("div", null, React.createElement("span", {
+    className: "k"
+  }, "Reply"), React.createElement("span", {
+    className: "v"
+  }, "~ 24 hours")))), React.createElement("div", {
+    className: "about-essay"
+  }, React.createElement(Reveal, {
+    delay: 80
+  }, React.createElement("p", null, React.createElement("span", {
+    className: "num"
+  }, "01"), "I'm 19, studying CS at Vidyashilp University in Bengaluru \u2014 but I didn't wait until graduation to start building. ", React.createElement("span", {
+    className: "accent"
+  }, "EduFee is already live at a real school,"), " with real parents and teachers depending on it every single day.")), React.createElement(Reveal, {
+    delay: 160
+  }, React.createElement("p", null, React.createElement("span", {
+    className: "num"
+  }, "02"), "I gravitate toward the kind of work that actually affects people \u2014 platforms that handle money, learning, health, or time. I pick up whatever it takes to ship the thing properly, and I've figured out that ", React.createElement("span", {
+    className: "accent"
+  }, "AI makes everything move faster"), " when you know how to wield it.")), React.createElement(Reveal, {
+    delay: 240
+  }, React.createElement("p", null, React.createElement("span", {
+    className: "num"
+  }, "03"), "I freelance between semesters and during breaks. If you have a product idea and need someone who'll treat it like their own \u2014 ", React.createElement("span", {
+    className: "accent"
+  }, "I'm genuinely that person."), "I reply fast, I ask good questions, and I don't disappear halfway through."))))));
 }
-
-/* ── MARQUEE ────────────────────────────────────────────────── */
 function Marquee() {
-  const items = ["React","Node.js","PostgreSQL","MongoDB","Anthropic","Firebase","Railway","Android","Next.js","TypeScript","Python","Stripe","Express","OpenAI","REST APIs"];
-  const row = (k) => {
+  const items = ["React", "Node.js", "PostgreSQL", "MongoDB", "Anthropic", "Firebase", "Railway", "Android", "Next.js", "TypeScript", "Python", "Stripe", "Express", "OpenAI", "REST APIs"];
+  const row = k => {
     const out = [];
-    items.forEach((t,i) => { out.push(<span key={`t${k}${i}`}>{t}</span>); out.push(<i key={`i${k}${i}`}>◆</i>); });
+    items.forEach((t, i) => {
+      out.push(React.createElement("span", {
+        key: `t${k}${i}`
+      }, t));
+      out.push(React.createElement("i", {
+        key: `i${k}${i}`
+      }, "\u25C6"));
+    });
     return out;
   };
-  return (
-    <div className="marquee" aria-hidden="true">
-      <div className="marquee__track">{row("a")}{row("b")}</div>
-    </div>
-  );
+  return React.createElement("div", {
+    className: "marquee",
+    "aria-hidden": "true"
+  }, React.createElement("div", {
+    className: "marquee__track"
+  }, row("a"), row("b")));
 }
-
-/* ── PROJECTS ───────────────────────────────────────────────── */
 function Projects() {
-  const projects = [
-    { n:"01", title:"EduFee",        sub:"School management platform",  status:{ t:"Live & deployed", c:"is-live"   }, desc:"Full-stack platform deployed at Emmanuel Suguna Jyothi High School, Bengaluru. Serves 200+ users daily across six modules.", tags:["React","Node.js","PostgreSQL","Anthropic","Firebase","Railway","Android"], featured:true },
-    { n:"02", title:"Trading Agent", sub:"Algorithmic AI trader",       status:{ t:"Built & In Testing", c:"is-testing" }, desc:"Autonomous AI trading agent built with Claude's tool-use API. Runs an agentic decision loop on live market data.", tags:["Python","Anthropic","yfinance","RSI/MACD"] },
-    { n:"03", title:"Market Mirror", sub:"Cognitive aptitude analyser", status:{ t:"Built",           c:""          }, desc:"Analyses trader decision-making across four market environments — bull, bear, volatile, ranging — with an AI tutor.", tags:["Python","Anthropic","Behavioural Finance"] },
-    { n:"04", title:"NEET Study",    sub:"Exam prep platform",          status:{ t:"Built",           c:""          }, desc:"Interactive web platform for NEET UG prep — Biology, Physics, Chemistry. 100+ MCQs, animated diagrams, formula guides.", tags:["React","HTML/CSS/JS","Python"] },
-  ];
-  return (
-    <section id="work" className="section">
-      <div className="section__inner">
-        <Reveal><span className="eyebrow">Selected Work</span></Reveal>
-        <h2 className="display" style={{ fontSize: "clamp(48px,9vw,140px)", marginTop: 24 }}>
-          <WordReveal words={["Things","I've"]} />
-          <br/>
-          <span className="accent"><WordReveal words={["built","+","shipped."]} baseDelay={140} /></span>
-        </h2>
-        <div className="projects">
-          {projects.map((p, idx) => (
-            <Reveal key={p.n} delay={idx * 60}>
-              <a href="#contact" className="project block">
-                <span className="project__num">/ {p.n}</span>
-                <h3 className="project__big">{p.title}</h3>
-                <div className="project__meta">
-                  <span className="project__sub">{p.sub}</span>
-                  <p className="project__desc">{p.desc}</p>
-                  <span className={`project__status ${p.status.c}`}>
-                    {p.status.c === "is-live" && <span className="live-dot" />}
-                    {p.status.t}
-                  </span>
-                  <ul className="project__tags">{p.tags.map(t => <li key={t}>{t}</li>)}</ul>
-                </div>
-                <span className="project__more">View <span className="arrow"><I.ArrowUpRight width="14" height="14" /></span></span>
-              </a>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal delay={120}>
-          <div className="featured-strip">
-            <div className="featured-strip__quote">
-              <p>"Prince built and deployed EduFee at our school — it's transformed how we manage fees and attendance."</p>
-              <cite>— Emmanuel Suguna Jyothi High School</cite>
-            </div>
-            <ul className="featured-strip__metrics">
-              <li><strong>200<span className="plus">+</span></strong><span className="label">Users daily</span></li>
-              <li><strong>06</strong><span className="label">Modules</span></li>
-              <li><strong>02</strong><span className="label">Android apps</span></li>
-              <li><strong>AI</strong><span className="label">Powered</span></li>
-            </ul>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
+  const projects = [{
+    n: "01",
+    title: "EduFee",
+    sub: "School management platform",
+    status: {
+      t: "Live & deployed",
+      c: "is-live"
+    },
+    desc: "Full-stack platform deployed at Emmanuel Suguna Jyothi High School, Bengaluru. Serves 200+ users daily across six modules.",
+    tags: ["React", "Node.js", "PostgreSQL", "Anthropic", "Firebase", "Railway", "Android"],
+    featured: true
+  }, {
+    n: "02",
+    title: "Trading Agent",
+    sub: "Algorithmic AI trader",
+    status: {
+      t: "Built & In Testing",
+      c: "is-testing"
+    },
+    desc: "Autonomous AI trading agent built with Claude's tool-use API. Runs an agentic decision loop on live market data.",
+    tags: ["Python", "Anthropic", "yfinance", "RSI/MACD"]
+  }, {
+    n: "03",
+    title: "Market Mirror",
+    sub: "Cognitive aptitude analyser",
+    status: {
+      t: "Built",
+      c: ""
+    },
+    desc: "Analyses trader decision-making across four market environments — bull, bear, volatile, ranging — with an AI tutor.",
+    tags: ["Python", "Anthropic", "Behavioural Finance"]
+  }, {
+    n: "04",
+    title: "NEET Study",
+    sub: "Exam prep platform",
+    status: {
+      t: "Built",
+      c: ""
+    },
+    desc: "Interactive web platform for NEET UG prep — Biology, Physics, Chemistry. 100+ MCQs, animated diagrams, formula guides.",
+    tags: ["React", "HTML/CSS/JS", "Python"]
+  }];
+  return React.createElement("section", {
+    id: "work",
+    className: "section"
+  }, React.createElement("div", {
+    className: "section__inner"
+  }, React.createElement(Reveal, null, React.createElement("span", {
+    className: "eyebrow"
+  }, "Selected Work")), React.createElement("h2", {
+    className: "display",
+    style: {
+      fontSize: "clamp(48px,9vw,140px)",
+      marginTop: 24
+    }
+  }, React.createElement(WordReveal, {
+    words: ["Things", "I've"]
+  }), React.createElement("br", null), React.createElement("span", {
+    className: "accent"
+  }, React.createElement(WordReveal, {
+    words: ["built", "+", "shipped."],
+    baseDelay: 140
+  }))), React.createElement("div", {
+    className: "projects"
+  }, projects.map((p, idx) => React.createElement(Reveal, {
+    key: p.n,
+    delay: idx * 60
+  }, React.createElement("a", {
+    href: "#contact",
+    className: "project block"
+  }, React.createElement("span", {
+    className: "project__num"
+  }, "/ ", p.n), React.createElement("h3", {
+    className: "project__big"
+  }, p.title), React.createElement("div", {
+    className: "project__meta"
+  }, React.createElement("span", {
+    className: "project__sub"
+  }, p.sub), React.createElement("p", {
+    className: "project__desc"
+  }, p.desc), React.createElement("span", {
+    className: `project__status ${p.status.c}`
+  }, p.status.c === "is-live" && React.createElement("span", {
+    className: "live-dot"
+  }), p.status.t), React.createElement("ul", {
+    className: "project__tags"
+  }, p.tags.map(t => React.createElement("li", {
+    key: t
+  }, t)))), React.createElement("span", {
+    className: "project__more"
+  }, "View ", React.createElement("span", {
+    className: "arrow"
+  }, React.createElement(I.ArrowUpRight, {
+    width: "14",
+    height: "14"
+  }))))))), React.createElement(Reveal, {
+    delay: 120
+  }, React.createElement("div", {
+    className: "featured-strip"
+  }, React.createElement("div", {
+    className: "featured-strip__quote"
+  }, React.createElement("p", null, "\"Prince built and deployed EduFee at our school \u2014 it's transformed how we manage fees and attendance.\""), React.createElement("cite", null, "\u2014 Emmanuel Suguna Jyothi High School")), React.createElement("ul", {
+    className: "featured-strip__metrics"
+  }, React.createElement("li", null, React.createElement("strong", null, "200", React.createElement("span", {
+    className: "plus"
+  }, "+")), React.createElement("span", {
+    className: "label"
+  }, "Users daily")), React.createElement("li", null, React.createElement("strong", null, "06"), React.createElement("span", {
+    className: "label"
+  }, "Modules")), React.createElement("li", null, React.createElement("strong", null, "02"), React.createElement("span", {
+    className: "label"
+  }, "Android apps")), React.createElement("li", null, React.createElement("strong", null, "AI"), React.createElement("span", {
+    className: "label"
+  }, "Powered")))))));
 }
-
-/* ── SERVICES ───────────────────────────────────────────────── */
 function Services() {
-  const services = [
-    { n:"01", t:"Full-stack web apps",        d:"Your idea, fully alive — front to back, fast, and built to actually survive real users."         },
-    { n:"02", t:"AI & LLM integration",       d:"I wire intelligence into your product so it feels like magic, not a demo."                       },
-    { n:"03", t:"Android apps",               d:"Ships to the Play Store. Feels native. Works offline. Doesn't embarrass you."                    },
-    { n:"04", t:"Payment systems",            d:"Money moves cleanly — no broken checkouts, no reconciliation nightmares."                        },
-    { n:"05", t:"Fintech & trading",          d:"Live data, sharp charts, algorithmic logic — built for people who trust numbers."                },
-    { n:"06", t:"Landing pages",              d:"One page. One job. Converts. Loads fast enough to never lose a lead."                            },
-    { n:"07", t:"SaaS dashboards",            d:"The kind of admin panel your customers actually want to open every morning."                     },
-    { n:"08", t:"E-commerce stores",          d:"Browse, add to cart, pay, done — a buying experience your store deserves."                      },
-    { n:"09", t:"School & EdTech platforms",  d:"Real institutions already run on what I've built. Attendance, fees, results — all handled."      },
-    { n:"10", t:"CRM & client portals",       d:"Your clients log in, see what they need, and trust you more. That's the whole goal."             },
-    { n:"11", t:"API design & integrations",  d:"Your tools talk to each other. Data flows. Nothing breaks at 2am."                              },
-    { n:"12", t:"Restaurant & hospitality",   d:"From menu to kitchen to table — digital, clean, and running without a hitch."                   },
-    { n:"13", t:"Real estate platforms",      d:"Listings that load fast, enquiries that don't slip through cracks, owners who stay happy."       },
-    { n:"14", t:"Healthcare & clinic tools",  d:"Patients book, show up, and leave with records intact. Stress leaves the building."              },
-    { n:"15", t:"Social & community apps",    d:"People join, stick around, and bring friends. Built for engagement that compounds."              },
-    { n:"16", t:"Automation & bots",          d:"The tedious stuff runs itself. You focus on the work only you can do."                          },
-  ];
-  return (
-    <section id="services" className="section">
-      <div className="section__inner">
-        <Reveal><span className="eyebrow">Services</span></Reveal>
-        <h2 className="display" style={{ fontSize: "clamp(48px,9vw,140px)", marginTop: 24 }}>
-          <WordReveal words={["What","I"]} />
-          <br/>
-          <span className="accent"><WordReveal words={["sell."]} baseDelay={140} /></span>
-        </h2>
-        <div className="services">
-          {services.map((s, i) => (
-            <Reveal key={s.n} delay={i * 60}>
-              <a href="#contact" className="service-row">
-                <span className="service__num">/ {s.n}</span>
-                <h3 className="service__title">{s.t}</h3>
-                <p className="service__desc">{s.d}</p>
-                <span className="service__arrow"><I.ArrowUpRight width="22" height="22" /></span>
-              </a>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  const services = [{
+    n: "01",
+    t: "Full-stack web apps",
+    d: "Your idea, fully alive — front to back, fast, and built to actually survive real users."
+  }, {
+    n: "02",
+    t: "AI & LLM integration",
+    d: "I wire intelligence into your product so it feels like magic, not a demo."
+  }, {
+    n: "03",
+    t: "Android apps",
+    d: "Ships to the Play Store. Feels native. Works offline. Doesn't embarrass you."
+  }, {
+    n: "04",
+    t: "Payment systems",
+    d: "Money moves cleanly — no broken checkouts, no reconciliation nightmares."
+  }, {
+    n: "05",
+    t: "Fintech & trading",
+    d: "Live data, sharp charts, algorithmic logic — built for people who trust numbers."
+  }, {
+    n: "06",
+    t: "Landing pages",
+    d: "One page. One job. Converts. Loads fast enough to never lose a lead."
+  }, {
+    n: "07",
+    t: "SaaS dashboards",
+    d: "The kind of admin panel your customers actually want to open every morning."
+  }, {
+    n: "08",
+    t: "E-commerce stores",
+    d: "Browse, add to cart, pay, done — a buying experience your store deserves."
+  }, {
+    n: "09",
+    t: "School & EdTech platforms",
+    d: "Real institutions already run on what I've built. Attendance, fees, results — all handled."
+  }, {
+    n: "10",
+    t: "CRM & client portals",
+    d: "Your clients log in, see what they need, and trust you more. That's the whole goal."
+  }, {
+    n: "11",
+    t: "API design & integrations",
+    d: "Your tools talk to each other. Data flows. Nothing breaks at 2am."
+  }, {
+    n: "12",
+    t: "Restaurant & hospitality",
+    d: "From menu to kitchen to table — digital, clean, and running without a hitch."
+  }, {
+    n: "13",
+    t: "Real estate platforms",
+    d: "Listings that load fast, enquiries that don't slip through cracks, owners who stay happy."
+  }, {
+    n: "14",
+    t: "Healthcare & clinic tools",
+    d: "Patients book, show up, and leave with records intact. Stress leaves the building."
+  }, {
+    n: "15",
+    t: "Social & community apps",
+    d: "People join, stick around, and bring friends. Built for engagement that compounds."
+  }, {
+    n: "16",
+    t: "Automation & bots",
+    d: "The tedious stuff runs itself. You focus on the work only you can do."
+  }];
+  return React.createElement("section", {
+    id: "services",
+    className: "section"
+  }, React.createElement("div", {
+    className: "section__inner"
+  }, React.createElement(Reveal, null, React.createElement("span", {
+    className: "eyebrow"
+  }, "Services")), React.createElement("h2", {
+    className: "display",
+    style: {
+      fontSize: "clamp(48px,9vw,140px)",
+      marginTop: 24
+    }
+  }, React.createElement(WordReveal, {
+    words: ["What", "I"]
+  }), React.createElement("br", null), React.createElement("span", {
+    className: "accent"
+  }, React.createElement(WordReveal, {
+    words: ["sell."],
+    baseDelay: 140
+  }))), React.createElement("div", {
+    className: "services"
+  }, services.map((s, i) => React.createElement(Reveal, {
+    key: s.n,
+    delay: i * 60
+  }, React.createElement("a", {
+    href: "#contact",
+    className: "service-row"
+  }, React.createElement("span", {
+    className: "service__num"
+  }, "/ ", s.n), React.createElement("h3", {
+    className: "service__title"
+  }, s.t), React.createElement("p", {
+    className: "service__desc"
+  }, s.d), React.createElement("span", {
+    className: "service__arrow"
+  }, React.createElement(I.ArrowUpRight, {
+    width: "22",
+    height: "22"
+  }))))))));
 }
-
-/* ── GLOW CARD ──────────────────────────────────────────────── */
-function GlowCard({ cat, tools, gradient, icon: Icon, delay }) {
-  return (
-    <Reveal delay={delay} className="glow-wrapper">
-      {/* bloom */}
-      <div className="glow-bloom" style={{ background: gradient }} />
-
-      {/* card */}
-      <div className="glow-card" style={{
-        background: `linear-gradient(#111113, #111113) padding-box, ${gradient} border-box`,
-      }}>
-        <div className="glow-inner">
-          {/* header */}
-          <div className="flex items-center justify-between">
-            <h4 className="glow-cat-title">
-              <span className="glow-cat-line" style={{ background: gradient }} />
-              <span style={{
-                background: gradient,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>
-                {cat}
-              </span>
-            </h4>
-            {Icon && (
-              <span style={{
-                background: gradient,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                opacity: 0.7,
-              }}>
-                <Icon width="20" height="20" />
-              </span>
-            )}
-          </div>
-          {/* tags */}
-          <ul className="glow-tags">
-            {tools.map(t => <li key={t} className="glow-tag">{t}</li>)}
-          </ul>
-        </div>
-      </div>
-    </Reveal>
-  );
+function GlowCard({
+  cat,
+  tools,
+  gradient,
+  icon: Icon,
+  delay
+}) {
+  return React.createElement(Reveal, {
+    delay: delay,
+    className: "glow-wrapper"
+  }, React.createElement("div", {
+    className: "glow-bloom",
+    style: {
+      background: gradient
+    }
+  }), React.createElement("div", {
+    className: "glow-card",
+    style: {
+      background: `linear-gradient(#111113, #111113) padding-box, ${gradient} border-box`
+    }
+  }, React.createElement("div", {
+    className: "glow-inner"
+  }, React.createElement("div", {
+    className: "flex items-center justify-between"
+  }, React.createElement("h4", {
+    className: "glow-cat-title"
+  }, React.createElement("span", {
+    className: "glow-cat-line",
+    style: {
+      background: gradient
+    }
+  }), React.createElement("span", {
+    style: {
+      background: gradient,
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+      backgroundClip: "text"
+    }
+  }, cat)), Icon && React.createElement("span", {
+    style: {
+      background: gradient,
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+      backgroundClip: "text",
+      opacity: 0.7
+    }
+  }, React.createElement(Icon, {
+    width: "20",
+    height: "20"
+  }))), React.createElement("ul", {
+    className: "glow-tags"
+  }, tools.map(t => React.createElement("li", {
+    key: t,
+    className: "glow-tag"
+  }, t))))));
 }
-
-/* ── STACK (uses glow cards) ────────────────────────────────── */
 function Stack() {
-  const groups = [
-    { cat:"Frontend",       icon: I.Monitor,  gradient:"linear-gradient(137deg,#FF3D77 0%,#FFB1CE 45%,#FF9D3C 100%)", tools:["React","Next.js","React Native","TypeScript","Tailwind CSS","HTML/CSS/JS"]  },
-    { cat:"Backend",        icon: I.Cpu,      gradient:"linear-gradient(137deg,#FFFFFF 0%,#7DD3FC 45%,#06B6D4 100%)", tools:["Node.js","Express.js","REST APIs","PostgreSQL","MongoDB"]                    },
-    { cat:"AI & Cloud",     icon: I.Zap,      gradient:"linear-gradient(137deg,#4361EE 0%,#E0AEFF 45%,#F72585 100%)", tools:["Anthropic API","OpenAI API","Firebase","Railway","OAuth 2.0"]                },
-    { cat:"Mobile & Other", icon: I.Palette,  gradient:"linear-gradient(137deg,#0D7377 0%,#14B8A6 45%,#22D3EE 100%)", tools:["Android","Stripe","Git / GitHub","JWT","Python"]                            },
-  ];
-  return (
-    <section id="stack" className="section">
-      <div className="section__inner">
-        <Reveal><span className="eyebrow">Tools</span></Reveal>
-        <h2 className="display" style={{ fontSize: "clamp(48px,9vw,140px)", marginTop: 24 }}>
-          <WordReveal words={["What","I"]} />
-          <br/>
-          <span className="accent"><WordReveal words={["work","with."]} baseDelay={140} /></span>
-        </h2>
-        <div className="glow-grid">
-          {groups.map((g, i) => <GlowCard key={g.cat} {...g} delay={i * 80} />)}
-        </div>
-      </div>
-    </section>
-  );
+  const groups = [{
+    cat: "Frontend",
+    icon: I.Monitor,
+    gradient: "linear-gradient(137deg,#FF3D77 0%,#FFB1CE 45%,#FF9D3C 100%)",
+    tools: ["React", "Next.js", "React Native", "TypeScript", "Tailwind CSS", "HTML/CSS/JS"]
+  }, {
+    cat: "Backend",
+    icon: I.Cpu,
+    gradient: "linear-gradient(137deg,#FFFFFF 0%,#7DD3FC 45%,#06B6D4 100%)",
+    tools: ["Node.js", "Express.js", "REST APIs", "PostgreSQL", "MongoDB"]
+  }, {
+    cat: "AI & Cloud",
+    icon: I.Zap,
+    gradient: "linear-gradient(137deg,#4361EE 0%,#E0AEFF 45%,#F72585 100%)",
+    tools: ["Anthropic API", "OpenAI API", "Firebase", "Railway", "OAuth 2.0"]
+  }, {
+    cat: "Mobile & Other",
+    icon: I.Palette,
+    gradient: "linear-gradient(137deg,#0D7377 0%,#14B8A6 45%,#22D3EE 100%)",
+    tools: ["Android", "Stripe", "Git / GitHub", "JWT", "Python"]
+  }];
+  return React.createElement("section", {
+    id: "stack",
+    className: "section"
+  }, React.createElement("div", {
+    className: "section__inner"
+  }, React.createElement(Reveal, null, React.createElement("span", {
+    className: "eyebrow"
+  }, "Tools")), React.createElement("h2", {
+    className: "display",
+    style: {
+      fontSize: "clamp(48px,9vw,140px)",
+      marginTop: 24
+    }
+  }, React.createElement(WordReveal, {
+    words: ["What", "I"]
+  }), React.createElement("br", null), React.createElement("span", {
+    className: "accent"
+  }, React.createElement(WordReveal, {
+    words: ["work", "with."],
+    baseDelay: 140
+  }))), React.createElement("div", {
+    className: "glow-grid"
+  }, groups.map((g, i) => React.createElement(GlowCard, _extends({
+    key: g.cat
+  }, g, {
+    delay: i * 80
+  }))))));
 }
-
-/* ── CONTACT ────────────────────────────────────────────────── */
-// ⚙️  Setup (no domain needed, 1 min):
-//   1. Go to https://formspree.io → Sign up free with your email
-//   2. Click "New Form" → name it anything → copy the form ID from the URL
-//   3. Replace YOUR_FORM_ID below with that ID  (looks like: xbjvkwno)
 const FORMSPREE_ID = "xnjrlrnl";
-
 function ContactForm() {
-  const [status, setStatus] = useState({ msg:"", err:false, sending:false });
-  const onSubmit = async (e) => {
+  const [status, setStatus] = useState({
+    msg: "",
+    err: false,
+    sending: false
+  });
+  const onSubmit = async e => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    const name    = (fd.get("name")    || "").toString().trim();
-    const email   = (fd.get("email")   || "").toString().trim();
+    const name = (fd.get("name") || "").toString().trim();
+    const email = (fd.get("email") || "").toString().trim();
     const message = (fd.get("message") || "").toString().trim();
     if (!name || !email || !message) {
-      setStatus({ msg:"Please fill all three fields.", err:true, sending:false });
+      setStatus({
+        msg: "Please fill all three fields.",
+        err: true,
+        sending: false
+      });
       return;
     }
-    setStatus({ msg:"Sending…", err:false, sending:true });
+    setStatus({
+      msg: "Sending…",
+      err: false,
+      sending: true
+    });
     try {
       const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({ name, email, message }),
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message
+        })
       });
       const data = await res.json();
       if (res.ok) {
-        setStatus({ msg:"✓ Sent — I'll reply within 24 hours.", err:false, sending:false });
+        setStatus({
+          msg: "✓ Sent — I'll reply within 24 hours.",
+          err: false,
+          sending: false
+        });
         e.target.reset();
       } else {
         throw new Error(data?.errors?.[0]?.message || "Submission failed");
       }
     } catch (err) {
-      setStatus({ msg:"Something went wrong. Email me: princekommina42@gmail.com", err:true, sending:false });
+      setStatus({
+        msg: "Something went wrong. Email me: princekommina42@gmail.com",
+        err: true,
+        sending: false
+      });
     }
   };
-  return (
-    <form className="form" onSubmit={onSubmit} noValidate>
-      <div className="form__intro">
-        <h3>Send a brief</h3>
-        <p>A sentence about the product, the deadline, and the budget is plenty.</p>
-      </div>
-      <div className="form__body">
-        <div className="form__row">
-          <label className="field">
-            <span className="field__label">01 — Name</span>
-            <input type="text" name="name" placeholder="Your name" required />
-          </label>
-          <label className="field">
-            <span className="field__label">02 — Email</span>
-            <input type="email" name="email" placeholder="you@company.com" required />
-          </label>
-        </div>
-        <label className="field">
-          <span className="field__label">03 — Project</span>
-          <textarea name="message" rows="5" placeholder="What you're building, your timeline, and budget if any." required />
-        </label>
-        <div className="form__submit-row">
-          <p className="form__tip">Reply usually within 24 hours.</p>
-          <button type="submit" className="send-btn" disabled={status.sending}>
-            {status.sending ? "Sending…" : <>Send brief <I.ArrowUpRight width="14" height="14" /></>}
-          </button>
-        </div>
-        <p className={`form__status ${status.err ? "is-error" : ""}`} aria-live="polite">{status.msg}</p>
-      </div>
-    </form>
-  );
+  return React.createElement("form", {
+    className: "form",
+    onSubmit: onSubmit,
+    noValidate: true
+  }, React.createElement("div", {
+    className: "form__intro"
+  }, React.createElement("h3", null, "Send a brief"), React.createElement("p", null, "A sentence about the product, the deadline, and the budget is plenty.")), React.createElement("div", {
+    className: "form__body"
+  }, React.createElement("div", {
+    className: "form__row"
+  }, React.createElement("label", {
+    className: "field"
+  }, React.createElement("span", {
+    className: "field__label"
+  }, "01 \u2014 Name"), React.createElement("input", {
+    type: "text",
+    name: "name",
+    placeholder: "Your name",
+    required: true
+  })), React.createElement("label", {
+    className: "field"
+  }, React.createElement("span", {
+    className: "field__label"
+  }, "02 \u2014 Email"), React.createElement("input", {
+    type: "email",
+    name: "email",
+    placeholder: "you@company.com",
+    required: true
+  }))), React.createElement("label", {
+    className: "field"
+  }, React.createElement("span", {
+    className: "field__label"
+  }, "03 \u2014 Project"), React.createElement("textarea", {
+    name: "message",
+    rows: "5",
+    placeholder: "What you're building, your timeline, and budget if any.",
+    required: true
+  })), React.createElement("div", {
+    className: "form__submit-row"
+  }, React.createElement("p", {
+    className: "form__tip"
+  }, "Reply usually within 24 hours."), React.createElement("button", {
+    type: "submit",
+    className: "send-btn",
+    disabled: status.sending
+  }, status.sending ? "Sending…" : React.createElement(React.Fragment, null, "Send brief ", React.createElement(I.ArrowUpRight, {
+    width: "14",
+    height: "14"
+  })))), React.createElement("p", {
+    className: `form__status ${status.err ? "is-error" : ""}`,
+    "aria-live": "polite"
+  }, status.msg)));
 }
-
 function Contact() {
-  return (
-    <section id="contact" className="section">
-      <div className="section__inner">
-        <Reveal><span className="eyebrow">Get in touch</span></Reveal>
-        <h2 className="contact-display">
-          <WordReveal words={["Let's"]} /><br/>
-          <span className="accent"><WordReveal words={["talk."]} baseDelay={120} /></span>
-        </h2>
-        <Reveal delay={200}><p className="contact__sub">I'm currently taking on new freelance work. Reply usually within 24 hours.</p></Reveal>
-        <div className="channels">
-          <Reveal delay={100}>
-            <a className="channel" href="mailto:princekommina42@gmail.com">
-              <span className="channel__left">
-                <span className="channel__label">Email</span>
-                <span className="channel__value">princekommina42@gmail.com</span>
-              </span>
-              <span className="channel__arrow"><I.ArrowUpRight width="20" height="20" /></span>
-            </a>
-          </Reveal>
-          <Reveal delay={180}>
-            <a className="channel" href="https://github.com/Prince95187" target="_blank" rel="noreferrer noopener">
-              <span className="channel__left">
-                <span className="channel__label">GitHub</span>
-                <span className="channel__value">github.com/Prince95187</span>
-              </span>
-              <span className="channel__arrow"><I.ArrowUpRight width="20" height="20" /></span>
-            </a>
-          </Reveal>
-          <Reveal delay={260}>
-            <div className="channel channel--soon">
-              <span className="channel__left">
-                <span className="channel__label">Upwork / Fiverr</span>
-                <span className="channel__value">Profiles coming soon</span>
-              </span>
-              <span className="channel__arrow"><I.ArrowUpRight width="20" height="20" /></span>
-            </div>
-          </Reveal>
-        </div>
-        <Reveal delay={120}><ContactForm /></Reveal>
-      </div>
-    </section>
-  );
+  return React.createElement("section", {
+    id: "contact",
+    className: "section"
+  }, React.createElement("div", {
+    className: "section__inner"
+  }, React.createElement(Reveal, null, React.createElement("span", {
+    className: "eyebrow"
+  }, "Get in touch")), React.createElement("h2", {
+    className: "contact-display"
+  }, React.createElement(WordReveal, {
+    words: ["Let's"]
+  }), React.createElement("br", null), React.createElement("span", {
+    className: "accent"
+  }, React.createElement(WordReveal, {
+    words: ["talk."],
+    baseDelay: 120
+  }))), React.createElement(Reveal, {
+    delay: 200
+  }, React.createElement("p", {
+    className: "contact__sub"
+  }, "I'm currently taking on new freelance work. Reply usually within 24 hours.")), React.createElement("div", {
+    className: "channels"
+  }, React.createElement(Reveal, {
+    delay: 100
+  }, React.createElement("a", {
+    className: "channel",
+    href: "mailto:princekommina42@gmail.com"
+  }, React.createElement("span", {
+    className: "channel__left"
+  }, React.createElement("span", {
+    className: "channel__label"
+  }, "Email"), React.createElement("span", {
+    className: "channel__value"
+  }, "princekommina42@gmail.com")), React.createElement("span", {
+    className: "channel__arrow"
+  }, React.createElement(I.ArrowUpRight, {
+    width: "20",
+    height: "20"
+  })))), React.createElement(Reveal, {
+    delay: 180
+  }, React.createElement("a", {
+    className: "channel",
+    href: "https://github.com/Prince95187",
+    target: "_blank",
+    rel: "noreferrer noopener"
+  }, React.createElement("span", {
+    className: "channel__left"
+  }, React.createElement("span", {
+    className: "channel__label"
+  }, "GitHub"), React.createElement("span", {
+    className: "channel__value"
+  }, "github.com/Prince95187")), React.createElement("span", {
+    className: "channel__arrow"
+  }, React.createElement(I.ArrowUpRight, {
+    width: "20",
+    height: "20"
+  })))), React.createElement(Reveal, {
+    delay: 260
+  }, React.createElement("div", {
+    className: "channel channel--soon"
+  }, React.createElement("span", {
+    className: "channel__left"
+  }, React.createElement("span", {
+    className: "channel__label"
+  }, "Upwork / Fiverr"), React.createElement("span", {
+    className: "channel__value"
+  }, "Profiles coming soon")), React.createElement("span", {
+    className: "channel__arrow"
+  }, React.createElement(I.ArrowUpRight, {
+    width: "20",
+    height: "20"
+  }))))), React.createElement(Reveal, {
+    delay: 120
+  }, React.createElement(ContactForm, null))));
 }
-
-/* ── FOOTER ─────────────────────────────────────────────────── */
 function Footer() {
-  return (
-    <footer className="footer">
-      <Reveal>
-        <h2 className="footer__big"><WordReveal words={["Prince","Kommina."]} /></h2>
-      </Reveal>
-      <Reveal delay={120}>
-        <div className="footer__row">
-          <div className="flex items-center gap-4">
-            <Logo />
-            <p>© 2026 · Built in Bengaluru</p>
-          </div>
-          <ul className="footer__links">
-            <li><a href="mailto:princekommina42@gmail.com">Email</a></li>
-            <li><a href="https://github.com/Prince95187" target="_blank" rel="noreferrer noopener">GitHub</a></li>
-            <li><a href="#contact">LinkedIn</a></li>
-            <li><a href="#top">Back to top ↑</a></li>
-          </ul>
-        </div>
-      </Reveal>
-    </footer>
-  );
+  return React.createElement("footer", {
+    className: "footer"
+  }, React.createElement(Reveal, null, React.createElement("h2", {
+    className: "footer__big"
+  }, React.createElement(WordReveal, {
+    words: ["Prince", "Kommina."]
+  }))), React.createElement(Reveal, {
+    delay: 120
+  }, React.createElement("div", {
+    className: "footer__row"
+  }, React.createElement("div", {
+    className: "flex items-center gap-4"
+  }, React.createElement(Logo, null), React.createElement("p", null, "\xA9 2026 \xB7 Built in Bengaluru")), React.createElement("ul", {
+    className: "footer__links"
+  }, React.createElement("li", null, React.createElement("a", {
+    href: "mailto:princekommina42@gmail.com"
+  }, "Email")), React.createElement("li", null, React.createElement("a", {
+    href: "https://github.com/Prince95187",
+    target: "_blank",
+    rel: "noreferrer noopener"
+  }, "GitHub")), React.createElement("li", null, React.createElement("a", {
+    href: "#contact"
+  }, "LinkedIn")), React.createElement("li", null, React.createElement("a", {
+    href: "#top"
+  }, "Back to top \u2191"))))));
 }
-
-/* ── APP ────────────────────────────────────────────────────── */
 function App() {
-  return (
-    <div id="top">
-      <ScrollProgress />
-      <Hero />
-      <About />
-      <Marquee />
-      <Projects />
-      <Services />
-      <Stack />
-      <Contact />
-      <Footer />
-    </div>
-  );
+  return React.createElement("div", {
+    id: "top"
+  }, React.createElement(ScrollProgress, null), React.createElement(Hero, null), React.createElement(About, null), React.createElement(Marquee, null), React.createElement(Projects, null), React.createElement(Services, null), React.createElement(Stack, null), React.createElement(Contact, null), React.createElement(Footer, null));
 }
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App, null));
 </script>
 </body>
 </html>

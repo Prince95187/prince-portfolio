@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Prince Kommina – Full-stack developer portfolio",
   "scripts": {
+    "build": "node build.js",
     "start": "serve . --listen $PORT --no-clipboard",
     "dev": "serve . --listen 5200"
   },
@@ -11,5 +12,8 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "@babel/standalone": "^7.29.7"
   }
 }
