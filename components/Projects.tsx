@@ -7,8 +7,16 @@ import {
   CardBody,
   CardItem,
 } from "@/components/ui/3d-card";
-import { FollowerPointerCard } from "@/components/ui/following-pointer";
-import { MacbookScroll } from "@/components/ui/macbook-scroll";
+import dynamic from "next/dynamic";
+
+const FollowerPointerCard = dynamic(
+  () => import("@/components/ui/following-pointer").then((m) => ({ default: m.FollowerPointerCard })),
+  { ssr: false }
+);
+const MacbookScroll = dynamic(
+  () => import("@/components/ui/macbook-scroll").then((m) => ({ default: m.MacbookScroll })),
+  { ssr: false }
+);
 
 const projects = [
   {

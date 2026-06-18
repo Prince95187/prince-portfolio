@@ -3,7 +3,13 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Mail, GitBranch, ExternalLink, Send, ArrowUpRight } from "lucide-react";
-import { Globe3D, type GlobeMarker } from "@/components/ui/3d-globe";
+import dynamic from "next/dynamic";
+import type { GlobeMarker } from "@/components/ui/3d-globe";
+
+const Globe3D = dynamic(
+  () => import("@/components/ui/3d-globe").then((m) => ({ default: m.Globe3D })),
+  { ssr: false, loading: () => <div className="w-full h-full bg-white/3 rounded-full animate-pulse" /> }
+);
 
 const globeMarkers: GlobeMarker[] = [
   { lat: 12.9716, lng: 77.5946, src: "https://assets.aceternity.com/avatars/1.webp", label: "Bengaluru, IN" },

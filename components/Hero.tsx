@@ -3,9 +3,21 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { EncryptedText } from "@/components/ui/encrypted-text";
-import { NoiseBackground } from "@/components/ui/noise-background";
-import { FollowerPointerCard } from "@/components/ui/following-pointer";
+import dynamic from "next/dynamic";
+
+// These components use Math.random() or browser globals — must be client-only
+const EncryptedText = dynamic(
+  () => import("@/components/ui/encrypted-text").then((m) => ({ default: m.EncryptedText })),
+  { ssr: false }
+);
+const NoiseBackground = dynamic(
+  () => import("@/components/ui/noise-background").then((m) => ({ default: m.NoiseBackground })),
+  { ssr: false }
+);
+const FollowerPointerCard = dynamic(
+  () => import("@/components/ui/following-pointer").then((m) => ({ default: m.FollowerPointerCard })),
+  { ssr: false }
+);
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
