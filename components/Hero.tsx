@@ -5,11 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import dynamic from "next/dynamic";
 
-// These components use Math.random() or browser globals — must be client-only
-const EncryptedText = dynamic(
-  () => import("@/components/ui/encrypted-text").then((m) => ({ default: m.EncryptedText })),
-  { ssr: false }
-);
+// NoiseBackground and FollowerPointerCard use browser globals — client-only
 const NoiseBackground = dynamic(
   () => import("@/components/ui/noise-background").then((m) => ({ default: m.NoiseBackground })),
   { ssr: false }
@@ -18,6 +14,27 @@ const FollowerPointerCard = dynamic(
   () => import("@/components/ui/following-pointer").then((m) => ({ default: m.FollowerPointerCard })),
   { ssr: false }
 );
+
+// Deterministic letter-stagger tagline — no Math.random, no hydration mismatch
+function TaglineReveal({ text, delay = 0 }: { text: string; delay?: number }) {
+  const chars = text.split("");
+  return (
+    <span aria-label={text} role="text" className="inline-block">
+      {chars.map((ch, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: delay + i * 0.018, ease: "easeOut" }}
+          className="inline-block"
+          style={{ whiteSpace: ch === " " ? "pre" : undefined }}
+        >
+          {ch}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -131,15 +148,10 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Encrypted text tagline */}
-        <motion.div {...fadeUp(0.7)} className="mb-10">
-          <EncryptedText
-            text="Full-stack developer · AI integrations · Android apps"
-            className="text-sm text-white/40 tracking-widest font-mono"
-            revealDelayMs={40}
-            flipDelayMs={30}
-          />
-        </motion.div>
+        {/* Tagline — deterministic stagger, no hydration issues */}
+        <div className="mb-10 text-sm text-white/40 tracking-widest font-mono">
+          <TaglineReveal text="Full-stack developer · AI integrations · Android apps" delay={0.8} />
+        </div>
 
         {/* CTA */}
         <motion.div {...fadeUp(0.8)} className="flex items-center gap-4 mb-16">
