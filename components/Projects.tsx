@@ -7,6 +7,8 @@ import {
   CardBody,
   CardItem,
 } from "@/components/ui/3d-card";
+import { FollowerPointerCard } from "@/components/ui/following-pointer";
+import { MacbookScroll } from "@/components/ui/macbook-scroll";
 
 const projects = [
   {
@@ -71,136 +73,176 @@ const projects = [
   },
 ];
 
+const LiveBadge = () => (
+  <a
+    href="https://edufee.up.railway.app"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#14B8A6]/10 border border-[#14B8A6]/30 rounded-full text-xs text-[#14B8A6] font-semibold tracking-widest hover:bg-[#14B8A6]/20 transition-all"
+  >
+    <span className="relative flex h-1.5 w-1.5">
+      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14B8A6] opacity-75" />
+      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#14B8A6]" />
+    </span>
+    LIVE PRODUCT
+  </a>
+);
+
 export default function Projects() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="projects" className="bg-[#0A0A0B] py-28 md:py-36 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-10" ref={ref}>
-        {/* Header */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-xs tracking-[0.3em] text-[#14B8A6] uppercase mb-4"
-        >
-          Selected Work
-        </motion.p>
+    <section id="projects" className="bg-[#0A0A0B] overflow-hidden">
+      {/* MacbookScroll — EduFee featured showcase */}
+      <div className="bg-[#0A0A0B]">
+        <MacbookScroll
+          title={
+            <span className="text-[#EFEFEE] font-black text-2xl md:text-4xl uppercase tracking-tight">
+              EduFee — Live at a real school.<br />
+              <span className="text-[#14B8A6]">200+ users. Every day.</span>
+            </span>
+          }
+          badge={<LiveBadge />}
+          src="https://placehold.co/1200x750/0d1117/14b8a6?text=EduFee+Dashboard"
+          showGradient={false}
+        />
+      </div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-          className="text-4xl sm:text-6xl md:text-7xl font-black uppercase leading-none tracking-tight text-[#EFEFEE] mb-16"
-        >
-          Things I&apos;ve /
-          <br />
-          <span className="text-white/25">built + shipped.</span>
-        </motion.h2>
+      {/* All projects grid */}
+      <div className="py-28 md:py-36">
+        <div className="max-w-7xl mx-auto px-6 md:px-10" ref={ref}>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-xs tracking-[0.3em] text-[#14B8A6] uppercase mb-4"
+          >
+            Selected Work
+          </motion.p>
 
-        {/* Project grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.num}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.7,
-                delay: 0.2 + i * 0.1,
-                ease: "easeOut",
-              }}
-            >
-              <CardContainer containerClassName="py-0 w-full">
-                <CardBody className="w-full bg-[#111113] border border-white/8 rounded-xl p-7 hover:border-white/15 transition-colors duration-300">
-                  <CardItem translateZ={20} className="w-full">
-                    <div className="flex items-start justify-between mb-4">
-                      <span className="text-xs font-mono text-white/20">
-                        {project.num}
-                      </span>
-                      <div className="flex items-center gap-2">
-                        {project.live && (
-                          <span className="relative flex h-1.5 w-1.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14B8A6] opacity-75" />
-                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#14B8A6]" />
-                          </span>
-                        )}
-                        <span
-                          className={`text-[10px] tracking-widest uppercase font-medium ${
-                            project.live ? "text-[#14B8A6]" : "text-white/30"
-                          }`}
-                        >
-                          {project.status}
-                        </span>
-                      </div>
-                    </div>
-                  </CardItem>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+            className="text-4xl sm:text-6xl md:text-7xl font-black uppercase leading-none tracking-tight text-[#EFEFEE] mb-16"
+          >
+            Things I&apos;ve /
+            <br />
+            <span className="text-white/25">built + shipped.</span>
+          </motion.h2>
 
-                  <CardItem translateZ={40} className="w-full">
-                    <h3
-                      className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-1"
-                      style={{ color: project.color }}
-                    >
+          {/* Project grid — each card wrapped with FollowerPointerCard */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {projects.map((project, i) => (
+              <motion.div
+                key={project.num}
+                initial={{ opacity: 0, y: 40 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.2 + i * 0.1,
+                  ease: "easeOut",
+                }}
+              >
+                <FollowerPointerCard
+                  title={
+                    <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: project.color }}>
                       {project.title}
-                    </h3>
-                    <p className="text-white/40 text-sm mb-4">
-                      {project.subtitle}
-                    </p>
-                  </CardItem>
-
-                  <CardItem translateZ={30} className="w-full">
-                    <p className="text-[#EFEFEE]/60 text-sm leading-relaxed mb-6">
-                      {project.description}
-                    </p>
-                  </CardItem>
-
-                  {project.metrics && (
-                    <CardItem translateZ={50} className="w-full">
-                      <div className="grid grid-cols-4 gap-3 mb-6 p-4 bg-white/3 rounded-lg border border-white/5">
-                        {project.metrics.map((m) => (
-                          <div key={m.label} className="text-center">
-                            <div className="text-lg font-black text-[#14B8A6]">
-                              {m.value}
-                            </div>
-                            <div className="text-[9px] text-white/30 tracking-widest uppercase">
-                              {m.label}
-                            </div>
+                    </span>
+                  }
+                >
+                  <CardContainer containerClassName="py-0 w-full">
+                    <CardBody className="w-full bg-[#111113] border border-white/8 rounded-xl p-7 hover:border-white/15 transition-colors duration-300">
+                      <CardItem translateZ={20} className="w-full">
+                        <div className="flex items-start justify-between mb-4">
+                          <span className="text-xs font-mono text-white/20">
+                            {project.num}
+                          </span>
+                          <div className="flex items-center gap-2">
+                            {project.live && (
+                              <span className="relative flex h-1.5 w-1.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14B8A6] opacity-75" />
+                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#14B8A6]" />
+                              </span>
+                            )}
+                            <span
+                              className={`text-[10px] tracking-widest uppercase font-medium ${
+                                project.live ? "text-[#14B8A6]" : "text-white/30"
+                              }`}
+                            >
+                              {project.status}
+                            </span>
                           </div>
-                        ))}
-                      </div>
-                    </CardItem>
-                  )}
+                        </div>
+                      </CardItem>
 
-                  {project.quote && (
-                    <CardItem translateZ={35} className="w-full">
-                      <div className="mb-6 p-4 border-l-2 border-[#14B8A6]/40 bg-[#14B8A6]/5 rounded-r-lg">
-                        <p className="text-xs text-white/50 italic leading-relaxed mb-2">
-                          &ldquo;{project.quote.text}&rdquo;
-                        </p>
-                        <p className="text-[10px] text-[#14B8A6] tracking-widest uppercase">
-                          — {project.quote.author}
-                        </p>
-                      </div>
-                    </CardItem>
-                  )}
-
-                  <CardItem translateZ={20} className="w-full">
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2.5 py-1 text-[10px] font-medium tracking-wider bg-white/5 border border-white/8 rounded-sm text-white/40"
+                      <CardItem translateZ={40} className="w-full">
+                        <h3
+                          className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-1"
+                          style={{ color: project.color }}
                         >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </CardItem>
-                </CardBody>
-              </CardContainer>
-            </motion.div>
-          ))}
+                          {project.title}
+                        </h3>
+                        <p className="text-white/40 text-sm mb-4">
+                          {project.subtitle}
+                        </p>
+                      </CardItem>
+
+                      <CardItem translateZ={30} className="w-full">
+                        <p className="text-[#EFEFEE]/60 text-sm leading-relaxed mb-6">
+                          {project.description}
+                        </p>
+                      </CardItem>
+
+                      {project.metrics && (
+                        <CardItem translateZ={50} className="w-full">
+                          <div className="grid grid-cols-4 gap-3 mb-6 p-4 bg-white/3 rounded-lg border border-white/5">
+                            {project.metrics.map((m) => (
+                              <div key={m.label} className="text-center">
+                                <div className="text-lg font-black text-[#14B8A6]">
+                                  {m.value}
+                                </div>
+                                <div className="text-[9px] text-white/30 tracking-widest uppercase">
+                                  {m.label}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </CardItem>
+                      )}
+
+                      {project.quote && (
+                        <CardItem translateZ={35} className="w-full">
+                          <div className="mb-6 p-4 border-l-2 border-[#14B8A6]/40 bg-[#14B8A6]/5 rounded-r-lg">
+                            <p className="text-xs text-white/50 italic leading-relaxed mb-2">
+                              &ldquo;{project.quote.text}&rdquo;
+                            </p>
+                            <p className="text-[10px] text-[#14B8A6] tracking-widest uppercase">
+                              — {project.quote.author}
+                            </p>
+                          </div>
+                        </CardItem>
+                      )}
+
+                      <CardItem translateZ={20} className="w-full">
+                        <div className="flex flex-wrap gap-2">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2.5 py-1 text-[10px] font-medium tracking-wider bg-white/5 border border-white/8 rounded-sm text-white/40"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </CardItem>
+                    </CardBody>
+                  </CardContainer>
+                </FollowerPointerCard>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

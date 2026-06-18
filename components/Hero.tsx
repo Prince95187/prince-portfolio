@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { EncryptedText } from "@/components/ui/encrypted-text";
+import { NoiseBackground } from "@/components/ui/noise-background";
+import { FollowerPointerCard } from "@/components/ui/following-pointer";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -23,6 +25,16 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   return (
+    <NoiseBackground
+      gradientColors={["rgba(20,184,166,0.15)", "rgba(13,115,119,0.08)", "rgba(10,10,11,0)"]}
+      noiseIntensity={0.15}
+      speed={0.05}
+      containerClassName="min-h-screen"
+    >
+    <FollowerPointerCard
+      title={<span className="text-[10px] font-bold tracking-widest uppercase text-[#14B8A6]">Prince Kommina</span>}
+      className="min-h-screen"
+    >
     <section
       id="top"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#0A0A0B]"
@@ -174,12 +186,14 @@ export default function Hero() {
         />
       </motion.div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes shimmer {
           0% { background-position: 0% center; }
           100% { background-position: 200% center; }
         }
       `}</style>
     </section>
+    </FollowerPointerCard>
+    </NoiseBackground>
   );
 }

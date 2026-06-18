@@ -3,6 +3,15 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Mail, GitBranch, ExternalLink, Send, ArrowUpRight } from "lucide-react";
+import { Globe3D, type GlobeMarker } from "@/components/ui/3d-globe";
+
+const globeMarkers: GlobeMarker[] = [
+  { lat: 12.9716, lng: 77.5946, src: "https://assets.aceternity.com/avatars/1.webp", label: "Bengaluru, IN" },
+  { lat: 40.7128, lng: -74.006, src: "https://assets.aceternity.com/avatars/2.webp", label: "New York" },
+  { lat: 51.5074, lng: -0.1278, src: "https://assets.aceternity.com/avatars/3.webp", label: "London" },
+  { lat: 35.6762, lng: 139.6503, src: "https://assets.aceternity.com/avatars/4.webp", label: "Tokyo" },
+  { lat: -33.8688, lng: 151.2093, src: "https://assets.aceternity.com/avatars/5.webp", label: "Sydney" },
+];
 
 const channels = [
   {
@@ -82,6 +91,28 @@ export default function Contact() {
           <br />
           <span className="text-white/25">talk.</span>
         </motion.h2>
+
+        {/* Globe */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          className="flex justify-center mb-12"
+        >
+          <div className="w-full max-w-sm h-72 md:h-96">
+            <Globe3D
+              markers={globeMarkers}
+              config={{
+                globeColor: "#0d1117",
+                atmosphereColor: "#14B8A6",
+                atmosphereIntensity: 0.3,
+                autoRotateSpeed: 0.5,
+                showAtmosphere: true,
+                ambientIntensity: 0.6,
+              }}
+            />
+          </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left — channels */}
