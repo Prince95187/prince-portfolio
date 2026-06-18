@@ -1,18 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  CardContainer,
-  CardBody,
-  CardItem,
-} from "@/components/ui/3d-card";
+import { ArrowUpRight } from "lucide-react";
 import dynamic from "next/dynamic";
 
-const FollowerPointerCard = dynamic(
-  () => import("@/components/ui/following-pointer").then((m) => ({ default: m.FollowerPointerCard })),
-  { ssr: false }
-);
 const MacbookScroll = dynamic(
   () => import("@/components/ui/macbook-scroll").then((m) => ({ default: m.MacbookScroll })),
   { ssr: false }
@@ -28,9 +20,8 @@ const projects = [
     status: "Live & Deployed",
     live: true,
     tags: ["React", "Node.js", "PostgreSQL", "Anthropic", "Firebase", "Railway", "Android"],
-    color: "#14B8A6",
     metrics: [
-      { value: "200+", label: "Users daily" },
+      { value: "200+", label: "Users / day" },
       { value: "06", label: "Modules" },
       { value: "02", label: "Android apps" },
       { value: "AI", label: "Powered" },
@@ -39,216 +30,204 @@ const projects = [
       text: "Prince built and deployed EduFee at our school — it's transformed how we manage fees and attendance.",
       author: "Emmanuel Suguna Jyothi High School",
     },
+    featured: true,
   },
   {
     num: "02",
     title: "Trading Agent",
     subtitle: "Algorithmic AI trader",
     description:
-      "Autonomous AI trading agent built with Claude's tool-use API. Runs an agentic decision loop on live market data.",
+      "Autonomous trading agent built with Claude's tool-use API. Runs an agentic decision loop on live market data — buys, sells, journals.",
     status: "Built & In Testing",
     live: false,
-    tags: ["Python", "Anthropic", "yfinance", "RSI/MACD"],
-    color: "#8B5CF6",
+    tags: ["Python", "Anthropic", "yfinance", "RSI / MACD"],
     metrics: null,
     quote: null,
+    featured: false,
   },
   {
     num: "03",
     title: "Market Mirror",
     subtitle: "Cognitive aptitude analyser",
     description:
-      "Analyses trader decision-making across four market environments — bull, bear, volatile, ranging — with an AI tutor.",
+      "Analyses trader decision-making across four market environments — bull, bear, volatile, ranging — with an AI tutor that adapts to your blindspots.",
     status: "Built",
     live: false,
     tags: ["Python", "Anthropic", "Behavioural Finance"],
-    color: "#F59E0B",
     metrics: null,
     quote: null,
+    featured: false,
   },
   {
     num: "04",
     title: "NEET Study",
     subtitle: "Exam prep platform",
     description:
-      "Interactive web platform for NEET UG prep — Biology, Physics, Chemistry. 100+ MCQs, animated diagrams, formula guides.",
+      "Interactive platform for NEET UG prep — Biology, Physics, Chemistry. 100+ MCQs, animated diagrams, formula guides, timed mock tests.",
     status: "Built",
     live: false,
-    tags: ["React", "HTML/CSS/JS", "Python"],
-    color: "#EC4899",
+    tags: ["React", "HTML / CSS / JS", "Python"],
     metrics: null,
     quote: null,
+    featured: false,
   },
 ];
+
+function ProjectCard({ project, index, inView }: { project: typeof projects[0]; index: number; inView: boolean }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: 0.12 + index * 0.09, ease: [0.22, 1, 0.36, 1] }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative flex flex-col bg-[#111214] border border-white/[0.07] rounded-xl p-6 md:p-8 cursor-pointer transition-all duration-300 hover:border-[#14B8A6]/20 hover:bg-[#111214]/80"
+      style={{
+        boxShadow: hovered ? "0 0 40px rgba(20,184,166,0.04), 0 4px 24px rgba(0,0,0,0.4)" : "0 2px 12px rgba(0,0,0,0.3)",
+      }}
+    >
+      {/* Teal corner glow on hover */}
+      {hovered && (
+        <div
+          className="absolute top-0 left-0 w-48 h-48 pointer-events-none"
+          style={{
+            background: "radial-gradient(circle at 0% 0%, rgba(20,184,166,0.08) 0%, transparent 70%)",
+            borderRadius: "inherit",
+          }}
+        />
+      )}
+
+      {/* Header row */}
+      <div className="flex items-start justify-between mb-5">
+        <span className="text-[10px] font-mono text-white/20 tracking-widest">/ {project.num}</span>
+        <div className="flex items-center gap-2">
+          {project.live && (
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14B8A6] opacity-60" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#14B8A6]" />
+            </span>
+          )}
+          <span className={`text-[9px] tracking-[0.22em] uppercase font-semibold ${project.live ? "text-[#14B8A6]" : "text-white/25"}`}>
+            {project.status}
+          </span>
+        </div>
+      </div>
+
+      {/* Title */}
+      <h3 className={`text-2xl md:text-3xl font-black uppercase tracking-tight leading-none mb-1.5 transition-colors duration-300 ${hovered ? "text-[#14B8A6]" : "text-[#EFEFEE]"}`}>
+        {project.title}
+      </h3>
+      <p className="text-xs text-white/35 tracking-wide mb-5">{project.subtitle}</p>
+
+      {/* Description */}
+      <p className="text-sm text-white/55 leading-relaxed mb-6 flex-1">{project.description}</p>
+
+      {/* Metrics strip */}
+      {project.metrics && (
+        <div className="grid grid-cols-4 gap-2 mb-6 p-4 bg-white/[0.025] rounded-lg border border-white/[0.06]">
+          {project.metrics.map((m) => (
+            <div key={m.label} className="text-center">
+              <div className="text-base font-black text-[#14B8A6] tabular-nums">{m.value}</div>
+              <div className="text-[8px] text-white/25 tracking-widest uppercase mt-0.5">{m.label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Quote */}
+      {project.quote && (
+        <div className="mb-6 pl-4 border-l-2 border-[#14B8A6]/25">
+          <p className="text-xs text-white/40 italic leading-relaxed mb-1.5">
+            &ldquo;{project.quote.text}&rdquo;
+          </p>
+          <p className="text-[9px] text-[#14B8A6] tracking-[0.18em] uppercase">— {project.quote.author}</p>
+        </div>
+      )}
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-1.5 mt-auto">
+        {project.tags.map((tag) => (
+          <span key={tag} className="px-2 py-1 text-[9px] font-medium tracking-wider bg-white/[0.04] border border-white/[0.07] rounded-sm text-white/35">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      {/* Arrow */}
+      <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8">
+        <ArrowUpRight
+          size={16}
+          className={`transition-all duration-300 ${hovered ? "text-[#14B8A6] translate-x-0.5 -translate-y-0.5" : "text-white/15"}`}
+        />
+      </div>
+    </motion.article>
+  );
+}
 
 const LiveBadge = () => (
   <a
     href="https://edufee.up.railway.app"
     target="_blank"
     rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#14B8A6]/10 border border-[#14B8A6]/30 rounded-full text-xs text-[#14B8A6] font-semibold tracking-widest hover:bg-[#14B8A6]/20 transition-all"
+    className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#14B8A6]/10 border border-[#14B8A6]/25 rounded-sm text-[10px] text-[#14B8A6] font-semibold tracking-[0.2em] uppercase hover:bg-[#14B8A6]/20 transition-all"
   >
     <span className="relative flex h-1.5 w-1.5">
       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14B8A6] opacity-75" />
       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#14B8A6]" />
     </span>
-    LIVE PRODUCT
+    Live Product
   </a>
 );
 
 export default function Projects() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="projects" className="bg-[#0A0A0B] overflow-hidden">
-      {/* MacbookScroll — EduFee featured showcase */}
-      <div className="bg-[#0A0A0B]">
+    <section id="projects" className="bg-[#0C0C0D] overflow-hidden">
+      {/* MacbookScroll — EduFee cinematic showcase */}
+      <div className="bg-[#0C0C0D]">
         <MacbookScroll
           title={
-            <span className="text-[#EFEFEE] font-black text-2xl md:text-4xl uppercase tracking-tight">
-              EduFee — Live at a real school.<br />
-              <span className="text-[#14B8A6]">200+ users. Every day.</span>
+            <span className="font-black text-2xl md:text-4xl uppercase tracking-tight" style={{ color: "#EFEFEE" }}>
+              EduFee — live at a real school.{" "}
+              <span style={{ color: "#14B8A6" }}>200+ users. Every day.</span>
             </span>
           }
           badge={<LiveBadge />}
-          src="https://placehold.co/1200x750/0d1117/14b8a6?text=EduFee+Dashboard"
+          src="https://placehold.co/1200x750/0c0c0d/14b8a6?text=EduFee+Dashboard"
           showGradient={false}
         />
       </div>
 
-      {/* All projects grid */}
-      <div className="py-28 md:py-36">
-        <div className="max-w-7xl mx-auto px-6 md:px-10" ref={ref}>
+      {/* Projects grid */}
+      <div className="py-24 md:py-32" ref={ref}>
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-xs tracking-[0.3em] text-[#14B8A6] uppercase mb-4"
+            transition={{ duration: 0.5 }}
+            className="text-[10px] tracking-[0.3em] text-[#14B8A6] uppercase mb-3"
           >
             Selected Work
           </motion.p>
 
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-            className="text-4xl sm:text-6xl md:text-7xl font-black uppercase leading-none tracking-tight text-[#EFEFEE] mb-16"
+            transition={{ duration: 0.65, delay: 0.07 }}
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase leading-[0.92] tracking-[-0.03em] text-[#EFEFEE] mb-14"
           >
-            Things I&apos;ve /
-            <br />
-            <span className="text-white/25">built + shipped.</span>
+            Things I&apos;ve /{" "}
+            <span className="text-white/20">built + shipped.</span>
           </motion.h2>
 
-          {/* Project grid — each card wrapped with FollowerPointerCard */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* items-start prevents empty-space stretch on shorter cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
             {projects.map((project, i) => (
-              <motion.div
-                key={project.num}
-                initial={{ opacity: 0, y: 40 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.2 + i * 0.1,
-                  ease: "easeOut",
-                }}
-              >
-                <FollowerPointerCard
-                  title={
-                    <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: project.color }}>
-                      {project.title}
-                    </span>
-                  }
-                >
-                  <CardContainer containerClassName="py-0 w-full">
-                    <CardBody className="w-full bg-[#111113] border border-white/8 rounded-xl p-7 hover:border-white/15 transition-colors duration-300">
-                      <CardItem translateZ={20} className="w-full">
-                        <div className="flex items-start justify-between mb-4">
-                          <span className="text-xs font-mono text-white/20">
-                            {project.num}
-                          </span>
-                          <div className="flex items-center gap-2">
-                            {project.live && (
-                              <span className="relative flex h-1.5 w-1.5">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14B8A6] opacity-75" />
-                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#14B8A6]" />
-                              </span>
-                            )}
-                            <span
-                              className={`text-[10px] tracking-widest uppercase font-medium ${
-                                project.live ? "text-[#14B8A6]" : "text-white/30"
-                              }`}
-                            >
-                              {project.status}
-                            </span>
-                          </div>
-                        </div>
-                      </CardItem>
-
-                      <CardItem translateZ={40} className="w-full">
-                        <h3
-                          className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-1"
-                          style={{ color: project.color }}
-                        >
-                          {project.title}
-                        </h3>
-                        <p className="text-white/40 text-sm mb-4">
-                          {project.subtitle}
-                        </p>
-                      </CardItem>
-
-                      <CardItem translateZ={30} className="w-full">
-                        <p className="text-[#EFEFEE]/60 text-sm leading-relaxed mb-6">
-                          {project.description}
-                        </p>
-                      </CardItem>
-
-                      {project.metrics && (
-                        <CardItem translateZ={50} className="w-full">
-                          <div className="grid grid-cols-4 gap-3 mb-6 p-4 bg-white/3 rounded-lg border border-white/5">
-                            {project.metrics.map((m) => (
-                              <div key={m.label} className="text-center">
-                                <div className="text-lg font-black text-[#14B8A6]">
-                                  {m.value}
-                                </div>
-                                <div className="text-[9px] text-white/30 tracking-widest uppercase">
-                                  {m.label}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </CardItem>
-                      )}
-
-                      {project.quote && (
-                        <CardItem translateZ={35} className="w-full">
-                          <div className="mb-6 p-4 border-l-2 border-[#14B8A6]/40 bg-[#14B8A6]/5 rounded-r-lg">
-                            <p className="text-xs text-white/50 italic leading-relaxed mb-2">
-                              &ldquo;{project.quote.text}&rdquo;
-                            </p>
-                            <p className="text-[10px] text-[#14B8A6] tracking-widest uppercase">
-                              — {project.quote.author}
-                            </p>
-                          </div>
-                        </CardItem>
-                      )}
-
-                      <CardItem translateZ={20} className="w-full">
-                        <div className="flex flex-wrap gap-2">
-                          {project.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-2.5 py-1 text-[10px] font-medium tracking-wider bg-white/5 border border-white/8 rounded-sm text-white/40"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </CardItem>
-                    </CardBody>
-                  </CardContainer>
-                </FollowerPointerCard>
-              </motion.div>
+              <ProjectCard key={project.num} project={project} index={i} inView={inView} />
             ))}
           </div>
         </div>

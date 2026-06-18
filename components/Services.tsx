@@ -128,40 +128,35 @@ function ServiceRow({
       className="group border-b border-white/5 cursor-pointer"
     >
       <div
-        className={`flex items-center justify-between py-5 px-2 transition-all duration-300 ${
-          hovered ? "translate-x-2" : ""
+        className={`grid grid-cols-[32px_1fr_auto] md:grid-cols-[56px_1fr_320px_32px] items-center gap-4 md:gap-8 py-5 md:py-6 px-2 transition-all duration-300 ${
+          hovered ? "translate-x-1.5" : ""
         }`}
       >
-        <div className="flex items-start gap-6 flex-1">
-          <span className="text-xs font-mono text-white/20 mt-1 w-6 flex-shrink-0">
-            {service.num}
-          </span>
-          <div className="flex-1">
-            <h3
-              className={`text-base md:text-xl font-bold uppercase tracking-tight transition-colors duration-300 ${
-                hovered ? "text-[#14B8A6]" : "text-[#EFEFEE]"
-              }`}
-            >
-              {service.title}
-            </h3>
-            <p
-              className={`text-sm text-white/40 mt-1 max-w-lg transition-all duration-300 ${
-                hovered ? "text-white/60" : ""
-              }`}
-            >
-              {service.description}
-            </p>
-          </div>
-        </div>
+        <span className="text-[10px] font-mono text-white/20 tracking-widest">{service.num}</span>
+
+        <h3
+          className={`text-lg md:text-2xl font-black uppercase tracking-[-0.02em] transition-colors duration-300 ${
+            hovered ? "text-[#14B8A6]" : "text-[#EFEFEE]"
+          }`}
+        >
+          {service.title}
+        </h3>
+
+        <p className="hidden md:block text-sm text-white/35 leading-relaxed">
+          {service.description}
+        </p>
+
         <ArrowUpRight
-          size={18}
-          className={`flex-shrink-0 ml-4 transition-all duration-300 ${
-            hovered
-              ? "text-[#14B8A6] translate-x-1 -translate-y-1"
-              : "text-white/20"
+          size={16}
+          className={`flex-shrink-0 transition-all duration-300 ${
+            hovered ? "text-[#14B8A6] translate-x-0.5 -translate-y-0.5" : "text-white/15"
           }`}
         />
       </div>
+      {/* Mobile description */}
+      <p className={`md:hidden text-xs text-white/35 leading-relaxed pb-4 px-2 pl-10 transition-all duration-300 ${hovered ? "text-white/55" : ""}`}>
+        {service.description}
+      </p>
     </motion.div>
   );
 }
@@ -176,25 +171,23 @@ export default function Services() {
       className="bg-[#0A0A0B] py-28 md:py-36 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10" ref={ref}>
-        {/* Header */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-xs tracking-[0.3em] text-[#14B8A6] uppercase mb-4"
+          transition={{ duration: 0.5 }}
+          className="text-[10px] tracking-[0.3em] text-[#14B8A6] uppercase mb-3"
         >
           Services
         </motion.p>
 
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-          className="text-4xl sm:text-6xl md:text-7xl font-black uppercase leading-none tracking-tight text-[#EFEFEE] mb-16"
+          transition={{ duration: 0.65, delay: 0.07 }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase leading-[0.92] tracking-[-0.03em] text-[#EFEFEE] mb-16"
         >
-          What I /
-          <br />
-          <span className="text-white/25">sell.</span>
+          What I /{" "}
+          <span className="text-white/20">sell.</span>
         </motion.h2>
 
         {/* Service rows */}

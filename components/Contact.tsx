@@ -74,28 +74,30 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="bg-[#0A0A0B] py-28 md:py-36 overflow-hidden"
+      className="relative bg-[#0C0C0D] py-28 md:py-36 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-10" ref={ref}>
-        {/* Header */}
+      {/* Ambient radial teal glow from top */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(20,184,166,0.05) 0%, transparent 70%)" }} />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-10 relative" ref={ref}>
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-xs tracking-[0.3em] text-[#14B8A6] uppercase mb-4"
+          transition={{ duration: 0.5 }}
+          className="text-[10px] tracking-[0.3em] text-[#14B8A6] uppercase mb-3"
         >
           Get in touch
         </motion.p>
 
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-          className="text-4xl sm:text-6xl md:text-7xl font-black uppercase leading-none tracking-tight text-[#EFEFEE] mb-16"
+          transition={{ duration: 0.65, delay: 0.07 }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase leading-[0.92] tracking-[-0.03em] text-[#EFEFEE] mb-16"
         >
-          Let&apos;s /
-          <br />
-          <span className="text-white/25">talk.</span>
+          Let&apos;s /{" "}
+          <span className="text-white/20">talk.</span>
         </motion.h2>
 
         {/* Globe */}
@@ -133,32 +135,44 @@ export default function Contact() {
               out if we&apos;re a good fit.
             </p>
 
-            {channels.map((ch) => (
-              <a
+            {channels.map((ch, i) => (
+              <motion.a
                 key={ch.label}
+                initial={{ opacity: 0, y: 16 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.25 + i * 0.08 }}
                 href={ch.href}
                 target={ch.href.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
-                className="group flex items-center justify-between p-5 bg-white/3 border border-white/8 rounded-xl hover:border-[#14B8A6]/40 hover:bg-[#14B8A6]/5 transition-all duration-300"
+                className="group flex items-center justify-between p-5 rounded-xl border transition-all duration-300"
+                style={{
+                  background: "rgba(255,255,255,0.025)",
+                  borderColor: "rgba(255,255,255,0.07)",
+                  backdropFilter: "blur(8px)",
+                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 8px rgba(0,0,0,0.3)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(20,184,166,0.3)";
+                  e.currentTarget.style.background = "rgba(20,184,166,0.04)";
+                  e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(20,184,166,0.1), 0 0 24px rgba(20,184,166,0.06), 0 2px 8px rgba(0,0,0,0.3)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.025)";
+                  e.currentTarget.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.05), 0 2px 8px rgba(0,0,0,0.3)";
+                }}
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-[#14B8A6]/10 transition-colors duration-300">
-                    <ch.icon size={16} className="text-white/40 group-hover:text-[#14B8A6] transition-colors duration-300" />
+                  <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/[0.07] flex items-center justify-center group-hover:bg-[#14B8A6]/10 group-hover:border-[#14B8A6]/20 transition-all duration-300">
+                    <ch.icon size={15} className="text-white/35 group-hover:text-[#14B8A6] transition-colors duration-300" />
                   </div>
                   <div>
-                    <p className="text-xs text-white/30 tracking-widest uppercase mb-0.5">
-                      {ch.label}
-                    </p>
-                    <p className="text-sm font-medium text-[#EFEFEE]">
-                      {ch.value}
-                    </p>
+                    <p className="text-[9px] text-white/25 tracking-[0.22em] uppercase font-semibold mb-0.5">{ch.label}</p>
+                    <p className="text-sm font-semibold text-[#EFEFEE]/80 group-hover:text-[#EFEFEE] transition-colors duration-300">{ch.value}</p>
                   </div>
                 </div>
-                <ArrowUpRight
-                  size={16}
-                  className="text-white/20 group-hover:text-[#14B8A6] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300"
-                />
-              </a>
+                <ArrowUpRight size={15} className="text-white/15 group-hover:text-[#14B8A6] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+              </motion.a>
             ))}
           </motion.div>
 
